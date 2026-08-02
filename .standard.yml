@@ -1,3 +1,13 @@
 # For available configuration options, see:
 #   https://github.com/standardrb/standard
-ruby_version: 3.2
+fix: false                # default: false
+parallel: false           # default: false
+format: progress          # default: Standard::Formatter
+ruby_version: 3.3.6       # default: RUBY_VERSION
+default_ignores: true     # default: true
+
+plugins:                  # default: []
+  - standard-performance
+
+# ignore:
+# extend_config:
