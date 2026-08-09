@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "contracts/globaldem_contract"
-require_relative "../../errors/params_error"
-
 module OpenTopo
   module Net
     module Params

@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "open_topo/net/params/globaldem_params"
-require "open_topo/errors/params_error"
-
 RSpec.describe OpenTopo::Net::Params::GlobaldemParams do
   let(:instance) { described_class.new(south:, north:, west:, east:, demtype:, output_format:) }
 

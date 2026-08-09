@@ -36,6 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "faraday_middleware", ">= 1.2"
   spec.add_dependency "multi_xml", ">= 0.9"
   spec.add_dependency "dry-validation", ">= 1.11"
+  spec.add_dependency "zeitwerk"
 
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "standard", "~> 1.3"

@@ -6,6 +6,7 @@ PATH
       faraday (>= 1.10)
       faraday_middleware (>= 1.2)
       multi_xml (>= 0.9)
+      zeitwerk
 
 GEM
   remote: https://rubygems.org/

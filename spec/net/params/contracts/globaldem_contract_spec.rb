@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "open_topo/net/params/contracts/globaldem_contract"
-require "open_topo/net/params/globaldem_params"
-
 RSpec.describe OpenTopo::Net::Params::Contracts::GlobaldemContract do
   subject(:validation_result) { described_class.new.call(globaldem_params) }
 
