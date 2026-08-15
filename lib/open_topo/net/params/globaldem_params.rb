@@ -58,6 +58,8 @@ module OpenTopo
           if !valid?
             raise ::OpenTopo::Errors::ParamsError, "Invalid parameters: #{error_messages.join(", ")}"
           end
+
+          true
         end
 
         def error_messages

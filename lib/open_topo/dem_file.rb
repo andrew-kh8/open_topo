@@ -1,31 +1,27 @@
 # typed: strict
 # frozen_string_literal: true
 
-module Apis
-  module OpenTopo
-    class DemFile
-      extend T::Sig
+module OpenTopo
+  class DemFile
+    attr_reader :original_file
+    alias_method :file, :original_file
 
-      sig { returns(File) }
-      attr_reader :tif
-      alias_method(:tiff, :tif)
+    attr_reader :dem_type
 
-      sig { returns(String) }
-      attr_reader :dem_type
+    attr_reader :output_format
 
-      sig { returns(String) }
-      attr_reader :output_format
+    attr_reader :csv
 
-      sig { returns(T.nilable(CSV)) }
-      attr_reader :csv
+    def initialize(original_file:, dem_type:, output_format:)
+      @original_file = original_file
+      @dem_type = dem_type
+      @output_format = output_format
+      @csv = nil
+    end
 
-      sig { params(tif: File, dem_type: String, output_format: String).void }
-      def initialize(tif:, dem_type:, output_format:)
-        @tif = tif
-        @dem_type = dem_type
-        @output_format = output_format
-        @csv = T.let(nil, T.nilable(CSV))
-      end
+    def build_csv
+      @csv ||= Services::GeoToCsvConverter.call(original_file)
+      @csv
     end
   end
 end
