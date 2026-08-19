@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "open_topo"
-require "vcr_setup"
+require "support/vcr_setup"
 
 require "factory_bot"
 
