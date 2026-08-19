@@ -4,6 +4,7 @@ require "open_topo"
 require "support/vcr_setup"
 
 require "factory_bot"
+require "simplecov"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

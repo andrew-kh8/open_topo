@@ -180,6 +180,7 @@ GEM
       sexp_processor (~> 4.16)
     securerandom (0.4.1)
     sexp_processor (4.17.5)
+    simplecov (1.1.1)
     standard (1.56.0)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.0)
@@ -213,6 +214,7 @@ DEPENDENCIES
   open_topo!
   rake (~> 13.0)
   rspec (~> 3.0)
+  simplecov (~> 1.1.1)
   standard (~> 1.3)
   vcr (~> 6.4)
 
@@ -286,6 +288,7 @@ CHECKSUMS
   ruby_parser (3.22.0) sha256=1eb4937cd9eb220aa2d194e352a24dba90aef00751e24c8dfffdb14000f15d23
   securerandom (0.4.1) sha256=cc5193d414a4341b6e225f0cb4446aceca8e50d5e1888743fac16987638ea0b1
   sexp_processor (4.17.5) sha256=ae2b48ba98353d5d465ce8759836b7a05f2e12c5879fcd14d7815b026de32f0e
+  simplecov (1.1.1) sha256=25825ef13f0b2e74694d769817dad6ab8e90131dabdaa666e522fea105521e78
   standard (1.56.0) sha256=ae2af4d9669589162ac69ed5ef59dcf9f346d4afc81f7e62b84339310dfcb787
   standard-custom (1.0.2) sha256=424adc84179a074f1a2a309bb9cf7cd6bfdb2b6541f20c6bf9436c0ba22a652b
   standard-performance (1.9.0) sha256=49483d31be448292951d80e5e67cdcb576c2502103c7b40aec6f1b6e9c88e3f2
