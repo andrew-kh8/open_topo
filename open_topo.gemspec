@@ -43,6 +43,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "standard", "~> 1.3"
   spec.add_development_dependency "fasterer", "~> 0.11"
+  spec.add_development_dependency "vcr", "~> 6.4"
+  spec.add_development_dependency "factory_bot", "~> 6.6"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html

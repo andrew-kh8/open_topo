@@ -1,0 +1,36 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://portal.opentopography.org/API/globaldem?API_Key=<OPEN_TOPOGRAPHY_API_KEY>&demtype=SRTMGL3&east=42.45911160123194&north=25.52&outputFormat=GTiff&south=25.52&west=42.45580075467154
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/octet-stream,application/xml
+      User-Agent:
+      - Ruby open_topo v0.1.0
+  response:
+    status:
+      code: 400
+      message: '400'
+    headers:
+      date:
+      - Wed, 19 Aug 2026 18:25:03 GMT
+      server:
+      - Apache
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - close
+      transfer-encoding:
+      - chunked
+      content-type:
+      - application/xml
+    body:
+      encoding: UTF-8
+      string: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><error>Error:
+        The north coordinate must be greater than the south coordinate.</error>'
+  recorded_at: Wed, 19 Aug 2026 18:25:03 GMT
+recorded_with: VCR 6.4.0

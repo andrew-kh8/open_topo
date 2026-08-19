@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 require "open_topo"
+require "vcr_setup"
+
+require "factory_bot"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -12,4 +15,9 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.include FactoryBot::Syntax::Methods
 end
+
+FactoryBot.definition_file_paths = ["./spec/factories"]
+FactoryBot.find_definitions
