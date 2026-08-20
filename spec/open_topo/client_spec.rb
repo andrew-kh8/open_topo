@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe OpenTopo::Client do
-  let(:instance) { described_class.new(ENV["OPEN_TOPOGRAPHY_API_KEY"]) }
+  let(:instance) { described_class.new("<OPEN_TOPOGRAPHY_API_KEY>") }
 
   describe "#globaldem" do
     let(:globaldem) { instance.globaldem(south: 25.526535836979747, north: 25.53120849654078, west: 42.45580075467154, east: 42.45911160123194) }

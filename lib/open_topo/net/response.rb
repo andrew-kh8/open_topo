@@ -7,8 +7,16 @@ module OpenTopo
 
       Headers = Struct.new(:date, :content_disposition, :content_length, :content_type) do
         def filename
-          content_disposition&.split("filename=")&.last&.delete('"')
+          if content_disposition.nil? || !content_disposition.match?(filename_header)
+            return nil
+          end
+
+          content_disposition.split(filename_header).last.delete('"')
         end
+
+        private
+
+        def filename_header = "filename="
       end
 
       def initialize(response)
