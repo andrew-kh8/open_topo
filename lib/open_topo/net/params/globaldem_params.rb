@@ -3,7 +3,7 @@
 module OpenTopo
   module Net
     module Params
-      class GlobaldemParams
+      class GlobaldemParams < BaseParams
         OUTPUT_FORMATS = {tif: "GTiff", hfa: "HFA", asc: "AAIGrid"}
         DEM_TYPES = {
           anadem: "ANADEM",                       # (DTM 30m)
@@ -25,6 +25,8 @@ module OpenTopo
           srtmgl3: "SRTMGL3"                      # (SRTM GL3 90m)
         }
 
+        validate_with Contracts::GlobaldemContract
+
         attr_reader :south, :north, :west, :east, :demtype, :output_format
 
         def initialize(south:, north:, west:, east:, demtype:, output_format:)
@@ -34,7 +36,8 @@ module OpenTopo
           @east = east
           @demtype = demtype
           @output_format = output_format
-          @validation_result = nil
+
+          super()
         end
 
         def to_params
@@ -46,36 +49,6 @@ module OpenTopo
             demtype: DEM_TYPES[demtype.to_sym],
             outputFormat: OUTPUT_FORMATS[output_format.to_sym]
           }
-        end
-        alias_method :to_h, :to_params
-
-        def valid?
-          validate
-          validation_result.success?
-        end
-
-        def validate!
-          if !valid?
-            raise ::OpenTopo::Errors::ParamsError, "Invalid parameters: #{error_messages.join(", ")}"
-          end
-
-          true
-        end
-
-        def error_messages
-          if !validation_result.nil? && validation_result.failure?
-            validation_result.errors(full: true).messages.map(&:text)
-          else
-            []
-          end
-        end
-
-        private
-
-        attr_reader :validation_result
-
-        def validate
-          @validation_result = Contracts::GlobaldemContract.new.call(to_params)
         end
       end
     end
