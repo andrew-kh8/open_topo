@@ -8,7 +8,7 @@ RSpec.describe OpenTopo::Errors::ResponseError do
     let(:message) { error_message }
 
     it "sets the message correctly" do
-      expect(instance.message).to eq(message)
+      expect(instance.message).to eq(error_message)
     end
   end
 

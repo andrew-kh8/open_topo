@@ -21,7 +21,7 @@ module OpenTopo
         if status.success?
           File.open(new_filename, "r")
         else
-          raise ::OpenTopo::Errors::ConvertError.new(error.strip)
+          raise OpenTopo::Errors::ConvertError, error.strip
         end
       end
 

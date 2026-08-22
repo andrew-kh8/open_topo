@@ -6,6 +6,8 @@ require "support/vcr_setup"
 require "factory_bot"
 require "simplecov"
 
+Dir["./spec/support/shared/**/*.rb"].sort.each { |f| require f }
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = ".rspec_status"

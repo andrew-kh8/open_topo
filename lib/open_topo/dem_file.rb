@@ -17,7 +17,7 @@ module OpenTopo
     end
 
     def convert_to(format, file_path: nil)
-      Services::DemConverter.call(original_file, file_format, file_path: file_path)
+      Services::DemConverter.call(original_file, format, file_path: file_path)
     end
   end
 end

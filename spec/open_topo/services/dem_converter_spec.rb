@@ -1,4 +1,38 @@
 RSpec.describe OpenTopo::Services::DemConverter do
+  describe ".call" do
+    subject { described_class.call(file, file_format, file_path:) }
+
+    let(:file) { File.open("spec/fixtures/files/test_tif.tif") }
+    let(:file_format) { :csv }
+    let(:file_path) { "spec/fixtures/files/test_tif.csv" }
+
+    after { File.delete(file_path) if File.exist?(file_path) }
+
+    it "convert tif to csv" do
+      expect(subject.path).to eq file_path
+    end
+
+    it "fills correct data" do
+      expect(FileUtils.compare_file(File.open("spec/fixtures/files/test_csv.csv"), subject)).to eq true
+    end
+
+    context "when file is not a File" do
+      let(:file) { "" }
+
+      it "raises an exception" do
+        expect { subject }.to raise_error(OpenTopo::Errors::FileError, "File is not a file (String)")
+      end
+    end
+
+    context "when file is not supported by gdal" do
+      let(:file) { Tempfile.new("fake_file") }
+
+      it "raises an exception" do
+        expect { subject }.to raise_error(OpenTopo::Errors::ConvertError, "ERROR 4: `#{file.path}' not recognized as a supported file format.")
+      end
+    end
+  end
+
   describe ".build_new_filename" do
     subject(:result) { described_class.send(:build_new_filename, file, file_path, file_format) }
 
@@ -57,7 +91,7 @@ RSpec.describe OpenTopo::Services::DemConverter do
       let(:file_format) { :csv }
 
       it "falls back to file-based name" do
-        expect(result).to end_with(".csv")
+        expect(result).to eq("spec/fixtures/files/test_tif.csv")
       end
     end
 
