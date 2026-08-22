@@ -76,6 +76,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
+      - name: Set up GDAL
+        run: |
+          sudo apt-get install gdal-bin
+          gdalinfo --version
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
