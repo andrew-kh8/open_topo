@@ -33,6 +33,10 @@ module OpenTopo
         !success?
       end
 
+      def data?
+        success? && status != 204
+      end
+
       private
 
       def parse_headers(headers)
