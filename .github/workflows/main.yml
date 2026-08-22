@@ -1,32 +1,90 @@
 name: Ruby
 
 on:
-  push:
-    branches:
-      - master
-
   pull_request:
+  push:
+    branches: [master]
 
 permissions:
   contents: read
 
 jobs:
-  build:
+  define-matrix:
     runs-on: ubuntu-latest
-    name: Ruby ${{ matrix.ruby }}
-    strategy:
-      matrix:
-        ruby:
-          - '3.3.6'
+
+    outputs:
+      ruby_versions: ${{ steps.ruby_versions.outputs.ruby_versions }}
 
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
+      - name: Define Ruby versions
+        id: ruby_versions
+        run: |
+          echo 'ruby_versions=["3.3.6"]' >> "$GITHUB_OUTPUT"
+
+# region lint
+  standardrb:
+    name: Ruby ${{ matrix.ruby }} standardrb
+    runs-on: ubuntu-latest
+
+    needs: [define-matrix]
+    strategy:
+      matrix:
+        ruby: ${{ fromJSON(needs.define-matrix.outputs.ruby_versions) }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
-      - name: Run the default task
-        run: bundle exec rake
+      - name: Standardrb
+        run: bundle exec standardrb
+
+  fasterer:
+    name: Ruby ${{ matrix.ruby }} fasterer
+    runs-on: ubuntu-latest
+
+    needs: [define-matrix]
+    strategy:
+      matrix:
+        ruby: ${{ fromJSON(needs.define-matrix.outputs.ruby_versions) }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - name: Fasterer
+        run: bundle exec fasterer
+# end region lint
+
+# region test
+  rspec:
+    name: Ruby ${{ matrix.ruby }} RSpec
+    runs-on: ubuntu-latest
+    needs: [standardrb, define-matrix]
+
+    strategy:
+      matrix:
+        ruby: ${{ fromJSON(needs.define-matrix.outputs.ruby_versions) }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      - name: Set up GDAL
+        run: |
+          sudo apt-get install gdal-bin
+          gdalinfo --version
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - name: RSpec run
+        run: bundle exec rspec
+# end region test

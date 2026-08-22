@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description = "A simple Ruby client for interacting with the Open Topography API."
   spec.homepage = "https://github.com/andrew-kh8/open_topo"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 3.2.0"
+  spec.required_ruby_version = ">= 3.3.6"
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/andrew-kh8/open_topo"
@@ -32,7 +32,21 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Uncomment to register a new dependency of your gem
-  # spec.add_dependency "example-gem", "~> 1.0"
+  spec.add_dependency "faraday", ">= 1.10"
+  spec.add_dependency "faraday_middleware", ">= 1.2"
+  spec.add_dependency "multi_xml", ">= 0.9"
+  spec.add_dependency "ox", ">= 2.14"
+  spec.add_dependency "dry-validation", ">= 1.11"
+  spec.add_dependency "zeitwerk"
+  spec.add_dependency "csv", ">= 3.3"
+
+  spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "standard", "~> 1.3"
+  spec.add_development_dependency "fasterer", "~> 0.11"
+  spec.add_development_dependency "vcr", "~> 6.4"
+  spec.add_development_dependency "factory_bot", "~> 6.6"
+  spec.add_development_dependency "simplecov", "~> 1.1.1"
+  spec.add_development_dependency "timecop", "~> 0.9"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
