@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
+require "tempfile"
+
 module OpenTopo
   module Services
     class ResponseToDemConverter
       DATE_TIME_FORMAT = "%F-%H-%M-%S"
-      FILE_WRITE_MODE = "wb"
 
       def self.call(response, dem_type:, output_format:)
         DemFile.new(original_file: file_from_response(response), dem_type:, output_format:)
@@ -13,7 +14,7 @@ module OpenTopo
       class << self
         private
 
-        def self.file_from_response(response)
+        def file_from_response(response)
           filename = filename_from_response(response)
           file = Tempfile.new([filename, ".tif"])
 
@@ -23,8 +24,8 @@ module OpenTopo
           file
         end
 
-        def self.filename_from_response(response)
-          response.headers.filename
+        def filename_from_response(response)
+          response.headers.filename || "dem_#{Time.now.strftime(DATE_TIME_FORMAT)}"
         end
       end
     end
