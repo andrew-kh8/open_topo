@@ -10,18 +10,14 @@ module OpenTopo
 
     attr_reader :output_format
 
-    attr_reader :csv
-
     def initialize(original_file:, dem_type:, output_format:)
       @original_file = original_file
       @dem_type = dem_type
       @output_format = output_format
-      @csv = nil
     end
 
-    def build_csv
-      @csv ||= Services::GeoToCsvConverter.call(original_file)
-      @csv
+    def convert_to(format, file_path: nil)
+      Services::DemConverter.call(original_file, file_format, file_path: file_path)
     end
   end
 end
