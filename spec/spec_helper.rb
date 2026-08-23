@@ -24,3 +24,5 @@ end
 
 FactoryBot.definition_file_paths = ["./spec/factories"]
 FactoryBot.find_definitions
+
+ENV["OPEN_TOPOGRAPHY_API_KEY"] ||= "test"

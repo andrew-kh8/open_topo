@@ -4,7 +4,7 @@ module OpenTopo
   module Net
     class Request
       GLOBALDEM_ENDPOINT = "/API/globaldem"
-      USGSDEM_ENDPOINT = "/API/usgs"
+      USGSDEM_ENDPOINT = "/API/usgsdem"
 
       def initialize(api_key = nil)
         @connection = Connection.new(api_key).build
