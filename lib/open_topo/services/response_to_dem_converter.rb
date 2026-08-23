@@ -22,8 +22,9 @@ module OpenTopo
 
           file.binmode
           file.write(response.body)
-          file.rewind
-          file
+          file.close
+
+          File.open(file, "r")
         end
 
         def filename_from_response(response)

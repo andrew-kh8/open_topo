@@ -2,7 +2,7 @@
 
 RSpec.describe OpenTopo::DemFile do
   let(:instance) { described_class.new(original_file:, dem_type: :srtmgl3, output_format: :tif) }
-  let(:original_file) { Tempfile.new(["original_file", ".tif"]) }
+  let(:original_file) { File.open("spec/fixtures/files/test_tif.tif", "r") }
 
   describe "#convert_to" do
     subject { instance.convert_to(format, file_path:) }

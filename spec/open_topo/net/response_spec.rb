@@ -27,7 +27,7 @@ RSpec.describe OpenTopo::Net::Response do
     describe "#filename" do
       context "when Content-Disposition header is present" do
         it "extracts the filename from the Content-Disposition header" do
-          expect(headers_instance.filename).to eq("file.txt")
+          expect(headers_instance.filename).to eq("file")
         end
       end
 

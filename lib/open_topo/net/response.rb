@@ -11,7 +11,7 @@ module OpenTopo
             return nil
           end
 
-          content_disposition.split(filename_header).last.delete('"')
+          File.basename(content_disposition.split(filename_header).last.delete('"'), ".*")
         end
 
         private
