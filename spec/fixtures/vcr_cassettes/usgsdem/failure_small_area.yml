@@ -1,0 +1,36 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://portal.opentopography.org/API/usgsdem?API_Key=<OPEN_TOPOGRAPHY_API_KEY>&datasetName=USGS30m&east=-88.52&north=40.49&outputFormat=GTiff&south=40.489999&west=-88.5398
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/octet-stream,application/xml
+      User-Agent:
+      - Ruby open_topo v0.1.0
+  response:
+    status:
+      code: 400
+      message: '400'
+    headers:
+      date:
+      - Sun, 23 Aug 2026 07:28:01 GMT
+      server:
+      - Apache
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - close
+      transfer-encoding:
+      - chunked
+      content-type:
+      - application/xml
+    body:
+      encoding: UTF-8
+      string: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><error>Error:
+        The selected area is too small: 0 km2.</error>'
+  recorded_at: Sun, 23 Aug 2026 07:28:01 GMT
+recorded_with: VCR 6.4.0

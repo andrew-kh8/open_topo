@@ -1,0 +1,29 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://portal.opentopography.org/API/usgsdem?API_Key=<OPEN_TOPOGRAPHY_API_KEY>&datasetName=USGS30m&east=42.45&north=25.52&outputFormat=GTiff&south=-25.52&west=-42.45
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/octet-stream,application/xml
+      User-Agent:
+      - Ruby open_topo v0.1.0
+  response:
+    status:
+      code: 204
+      message: '204'
+    headers:
+      date:
+      - Sun, 23 Aug 2026 07:28:00 GMT
+      server:
+      - Apache
+      access-control-allow-origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Sun, 23 Aug 2026 07:28:00 GMT
+recorded_with: VCR 6.4.0
