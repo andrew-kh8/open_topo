@@ -9,7 +9,7 @@ module OpenTopo
       FILENAME_EXT_SPLITTER = ".*"
 
       def self.call(file, file_format, file_path: nil)
-        if !File.file?(file)
+        if file.nil? || !File.file?(file)
           raise OpenTopo::Errors::FileError.new("File is not a file (#{file.class})", file_path: file)
         end
 
