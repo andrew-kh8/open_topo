@@ -5,7 +5,7 @@ RSpec.describe OpenTopo::Client do
 
   describe "#globaldem" do
     context "with valid parameters" do
-      let(:globaldem) { instance.globaldem(south: 25.526535836979747, north: 25.53120849654078, west: 42.45580075467154, east: 42.45911160123194) }
+      let(:globaldem) { instance.globaldem(south: 42.45580075467154, north: 42.45911160123194, west: 25.526535836979747, east: 25.53120849654078) }
 
       after { File.delete(globaldem.file) if File.exist?(globaldem.file) }
 
@@ -18,8 +18,8 @@ RSpec.describe OpenTopo::Client do
 
     context "with invalid parameters" do
       context "when the parameters are validated with failure" do
-        let(:globaldem) { instance.globaldem(south: 25.52, north: 25.52, west: 42.455, east: 42.459) }
-        let(:error_message) { "Invalid parameters: south must be less than north (25.52)" }
+        let(:globaldem) { instance.globaldem(south: 42.455, north: 42.459, west: 25.52, east: 25.52) }
+        let(:error_message) { "Invalid parameters: west must be less than east (25.52)" }
 
         it "raises an error" do
           expect { globaldem }.to raise_error(OpenTopo::Errors::ParamsError, error_message)
@@ -27,9 +27,9 @@ RSpec.describe OpenTopo::Client do
       end
 
       context "when request fails" do
-        let(:globaldem) { instance.globaldem(south: -25.52, north: 25.52, west: -42.45, east: 42.45) }
+        let(:globaldem) { instance.globaldem(south: -42.45580075467154, north: 42.45911160123194, west: -25.526535836979747, east: 25.53120849654078) }
         let(:error_message) do
-          "Error: The maximum area for SRTMGL3 is 4,050,000 km2. The selected area is 60,801,614 km2."
+          "Error: The maximum area for SRTMGL3 is 4,050,000 km2. The selected area is 50,526,423 km2."
         end
 
         it "raises an error" do

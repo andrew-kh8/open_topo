@@ -19,7 +19,7 @@ RSpec.describe OpenTopo::Net::Request do
     end
 
     context "with invalid parameters" do
-      let(:params) { build(:globaldem_params, north: 25.52, south: 25.52) }
+      let(:params) { build(:globaldem_params, north: 42.459, south: 42.459) }
 
       it "returns a Response object" do
         VCR.use_cassette("globaldem/failure_request") do
