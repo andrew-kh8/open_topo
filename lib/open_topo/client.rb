@@ -34,5 +34,18 @@ module OpenTopo
         raise ::OpenTopo::Errors::ResponseError, response.body
       end
     end
+
+    def elevation(long:, lat:, dataset:)
+      params = Net::Params::ElevationParams.new(long:, lat:, dataset:)
+      params.validate!
+
+      response = @request.elevation(params)
+
+      if response.success?
+        # build something
+      else
+        raise ::OpenTopo::Errors::ResponseError, response.body
+      end
+    end
   end
 end
