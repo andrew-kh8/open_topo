@@ -21,7 +21,7 @@ RSpec.describe OpenTopo::Errors::FileError do
     end
 
     context "when file path is a real path" do
-      let(:file_path) { "spec/fixtures/files/test_tif.tif" }
+      let(:file_path) { "spec/fixtures/files/global_tif.tif" }
       it { expect(FileUtils.compare_file(File.open(file_path), subject)).to eq true }
     end
   end

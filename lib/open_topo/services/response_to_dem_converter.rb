@@ -15,13 +15,16 @@ module OpenTopo
         private
 
         def file_from_response(response)
+          return nil if !response.data?
+
           filename = filename_from_response(response)
-          file = Tempfile.new([filename, ".tif"])
+          file = File.new([filename, ".tif"].join, "w")
 
           file.binmode
           file.write(response.body)
-          file.rewind
-          file
+          file.close
+
+          File.open(file, "r")
         end
 
         def filename_from_response(response)

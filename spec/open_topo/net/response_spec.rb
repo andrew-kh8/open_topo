@@ -27,7 +27,7 @@ RSpec.describe OpenTopo::Net::Response do
     describe "#filename" do
       context "when Content-Disposition header is present" do
         it "extracts the filename from the Content-Disposition header" do
-          expect(headers_instance.filename).to eq("file.txt")
+          expect(headers_instance.filename).to eq("file")
         end
       end
 
@@ -60,6 +60,38 @@ RSpec.describe OpenTopo::Net::Response do
       expect(instance.headers.content_type).to eq(content_type)
 
       expect(instance.headers.values.compact.size).to eq(4)
+    end
+
+    context "when status is 404" do
+      let(:status) { 404 }
+
+      it "set body as default text" do
+        expect(instance.body).to eq("Not found")
+        expect(instance.status).to eq(404)
+
+        expect(instance.headers.date).to eq(date)
+        expect(instance.headers.content_disposition).to eq(content_disposition)
+        expect(instance.headers.content_length).to eq(content_length)
+        expect(instance.headers.content_type).to eq(content_type)
+
+        expect(instance.headers.values.compact.size).to eq(4)
+      end
+    end
+
+    context "when status is 204" do
+      let(:status) { 204 }
+
+      it "set body as default text" do
+        expect(instance.body).to eq("No data")
+        expect(instance.status).to eq(204)
+
+        expect(instance.headers.date).to eq(date)
+        expect(instance.headers.content_disposition).to eq(content_disposition)
+        expect(instance.headers.content_length).to eq(content_length)
+        expect(instance.headers.content_type).to eq(content_type)
+
+        expect(instance.headers.values.compact.size).to eq(4)
+      end
     end
   end
 

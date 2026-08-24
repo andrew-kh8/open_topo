@@ -21,5 +21,18 @@ module OpenTopo
         raise ::OpenTopo::Errors::ResponseError, response.body
       end
     end
+
+    def usgsdem(south:, north:, west:, east:, dataset_name: :usgs10m, output_format: :tif)
+      params = Net::Params::UsgsdemParams.new(south:, north:, west:, east:, dataset_name:, output_format:)
+      params.validate!
+
+      response = @request.usgsdem(params)
+
+      if response.success?
+        Services::ResponseToDemConverter.call(response, dem_type: dataset_name, output_format:)
+      else
+        raise ::OpenTopo::Errors::ResponseError, response.body
+      end
+    end
   end
 end

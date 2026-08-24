@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://portal.opentopography.org/API/globaldem?API_Key=<OPEN_TOPOGRAPHY_API_KEY>&demtype=SRTMGL3&east=25.53120849654078&north=42.45911160123194&outputFormat=GTiff&south=-42.45580075467154&west=-25.526535836979747
+    uri: https://portal.opentopography.org/API/usgsdem?API_Key=<OPEN_TOPOGRAPHY_API_KEY>&datasetName=USGS30m&east=-88.52&north=40.49&outputFormat=GTiff&south=40.489999&west=-88.5398
     body:
       encoding: US-ASCII
       string: ''
@@ -17,7 +17,7 @@ http_interactions:
       message: '400'
     headers:
       date:
-      - Wed, 19 Aug 2026 18:57:37 GMT
+      - Sun, 23 Aug 2026 07:28:01 GMT
       server:
       - Apache
       access-control-allow-origin:
@@ -31,7 +31,6 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><error>Error:
-        The maximum area for SRTMGL3 is 4,050,000 km2. The selected area is 50,526,423
-        km2.</error>'
-  recorded_at: Wed, 19 Aug 2026 18:57:37 GMT
+        The selected area is too small: 0 km2.</error>'
+  recorded_at: Sun, 23 Aug 2026 07:28:01 GMT
 recorded_with: VCR 6.4.0

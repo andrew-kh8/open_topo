@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :globaldem_params, class: "OpenTopo::Net::Params::GlobaldemParams" do
-    south { 25.526535836979747 }
-    north { 25.53120849654078 }
-    west { 42.45580075467154 }
-    east { 42.45911160123194 }
+    south { 42.45580075467154 }
+    north { 42.45911160123194 }
+    west { 25.526535836979747 }
+    east { 25.53120849654078 }
     demtype { :srtmgl3 }
     output_format { :tif }
 

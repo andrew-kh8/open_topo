@@ -2,9 +2,9 @@ RSpec.describe OpenTopo::Services::DemConverter do
   describe ".call" do
     subject { described_class.call(file, file_format, file_path:) }
 
-    let(:file) { File.open("spec/fixtures/files/test_tif.tif") }
+    let(:file) { File.open("spec/fixtures/files/global_tif.tif") }
     let(:file_format) { :csv }
-    let(:file_path) { "spec/fixtures/files/test_tif.csv" }
+    let(:file_path) { "spec/fixtures/files/global_tif.csv" }
 
     after { File.delete(file_path) if File.exist?(file_path) }
 
@@ -13,7 +13,7 @@ RSpec.describe OpenTopo::Services::DemConverter do
     end
 
     it "fills correct data" do
-      expect(FileUtils.compare_file(File.open("spec/fixtures/files/test_csv.csv"), subject)).to eq true
+      expect(FileUtils.compare_file(File.open("spec/fixtures/files/global_csv.csv"), subject)).to eq true
     end
 
     context "when file is not a File" do
@@ -38,11 +38,11 @@ RSpec.describe OpenTopo::Services::DemConverter do
 
     let(:file_path) { "./spec" }
     let(:file_format) { :csv }
-    let(:file) { File.new("spec/fixtures/files/test_tif.tif") }
+    let(:file) { File.new("spec/fixtures/files/global_tif.tif") }
 
     context "when file_path is a directory" do
       it "returns a path inside the directory with correct extension" do
-        expect(result).to eq("./spec/test_tif.csv")
+        expect(result).to eq("./spec/global_tif.csv")
       end
     end
 
@@ -50,7 +50,7 @@ RSpec.describe OpenTopo::Services::DemConverter do
       let(:file_path) { "./spec/" }
 
       it "adds the extension to the provided file name" do
-        expect(result).to eq("./spec/test_tif.csv")
+        expect(result).to eq("./spec/global_tif.csv")
       end
     end
 
@@ -66,7 +66,7 @@ RSpec.describe OpenTopo::Services::DemConverter do
       let(:file_path) { nil }
 
       it "builds filename based on the file object" do
-        expect(result).to eq("spec/fixtures/files/test_tif.csv")
+        expect(result).to eq("spec/fixtures/files/global_tif.csv")
       end
     end
 
@@ -74,7 +74,7 @@ RSpec.describe OpenTopo::Services::DemConverter do
       let(:file_format) { "json" }
 
       it "uses the provided string extension" do
-        expect(result).to eq("./spec/test_tif.json")
+        expect(result).to eq("./spec/global_tif.json")
       end
     end
 
@@ -82,7 +82,7 @@ RSpec.describe OpenTopo::Services::DemConverter do
       let(:file_format) { nil }
 
       it "keeps original extension from file_path" do
-        expect(result).to eq("./spec/test_tif.")
+        expect(result).to eq("./spec/global_tif.")
       end
     end
 
@@ -91,7 +91,7 @@ RSpec.describe OpenTopo::Services::DemConverter do
       let(:file_format) { :csv }
 
       it "falls back to file-based name" do
-        expect(result).to eq("spec/fixtures/files/test_tif.csv")
+        expect(result).to eq("spec/fixtures/files/global_tif.csv")
       end
     end
 
