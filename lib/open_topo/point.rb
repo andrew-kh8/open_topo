@@ -12,7 +12,7 @@ module OpenTopo
     attr_reader :heigh
     attr_reader :unit
 
-    def initialize(long:, lat:, heigh:, unit: "m")
+    def initialize(long:, lat:, heigh: nil, unit: "m")
       @long = long
       @lat = lat
       @heigh = heigh

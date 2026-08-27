@@ -1,0 +1,34 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://portal.opentopography.org/API/v1/elevation?API_Key=<OPEN_TOPOGRAPHY_API_KEY>&dataset=SRTM_GL3&latitude=50&longitude=-150
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/octet-stream,application/json,application/xml
+      User-Agent:
+      - Ruby open_topo v0.1.0
+  response:
+    status:
+      code: 404
+      message: '404'
+    headers:
+      date:
+      - Thu, 27 Aug 2026 18:41:02 GMT
+      server:
+      - Apache
+      access-control-allow-origin:
+      - "*"
+      transfer-encoding:
+      - chunked
+      content-type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"Status": "Not Found", "Message": "Elevation for this point is not
+        found with this dataset.", "Elevation": null}'
+  recorded_at: Thu, 27 Aug 2026 18:41:04 GMT
+recorded_with: VCR 6.4.0
