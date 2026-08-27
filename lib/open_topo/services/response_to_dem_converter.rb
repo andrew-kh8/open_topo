@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "tempfile"
-
 module OpenTopo
   module Services
     class ResponseToDemConverter

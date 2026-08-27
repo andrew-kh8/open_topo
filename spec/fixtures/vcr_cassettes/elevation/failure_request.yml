@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://portal.opentopography.org/API/v1/elevation?API_Key=<OPEN_TOPOGRAPHY_API_KEY>&dataset=SRTM_GL3&latitude=51.0176&longitude=200
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/octet-stream,application/json,application/xml
+      User-Agent:
+      - Ruby open_topo v0.1.0
+  response:
+    status:
+      code: 400
+      message: '400'
+    headers:
+      date:
+      - Thu, 27 Aug 2026 17:56:43 GMT
+      server:
+      - Apache
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - close
+      transfer-encoding:
+      - chunked
+      content-type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"Status": "Bad Request", "Message": "Missing or invalid parameters.
+        Coordinates out of bounds. Valid range: Lat [-90, 90], Lon [-180, 180].",
+        "Elevation": null}'
+  recorded_at: Thu, 27 Aug 2026 17:56:43 GMT
+recorded_with: VCR 6.4.0

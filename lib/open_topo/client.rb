@@ -35,14 +35,14 @@ module OpenTopo
       end
     end
 
-    def elevation(long:, lat:, dataset:)
+    def elevation(long:, lat:, dataset: :srtmgl3)
       params = Net::Params::ElevationParams.new(long:, lat:, dataset:)
       params.validate!
 
       response = @request.elevation(params)
 
       if response.success?
-        # build something
+        Services::ResponseToPointConverter.call(response)
       else
         raise ::OpenTopo::Errors::ResponseError, response.body
       end

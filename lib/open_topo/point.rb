@@ -1,0 +1,22 @@
+# typed: strict
+# frozen_string_literal: true
+
+module OpenTopo
+  class Point
+    attr_reader :long
+    alias_method :longitude, :long
+
+    attr_reader :lat
+    alias_method :latitude, :lat
+
+    attr_reader :heigh
+    attr_reader :unit
+
+    def initialize(long:, lat:, heigh:, unit: "m")
+      @long = long
+      @lat = lat
+      @heigh = heigh
+      @unit = unit
+    end
+  end
+end
