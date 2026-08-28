@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-RSpec.describe OpenTopo::Net::Params::Contracts::GlobaldemContract do
+RSpec.describe OpenTopo::Net::Params::Contracts::UsgsdemContract do
   subject(:validation_result) { described_class.new.call(globaldem_params) }
 
   let(:globaldem_params) do
     {
-      south: south,
-      north: north,
-      west: west,
-      east: east,
-      demtype: demtype,
+      south:,
+      north:,
+      west:,
+      east:,
+      datasetName: dataset_name,
       outputFormat: output_format
     }
   end
@@ -18,7 +18,7 @@ RSpec.describe OpenTopo::Net::Params::Contracts::GlobaldemContract do
   let(:north) { 10.0 }
   let(:west) { -20.0 }
   let(:east) { 20.0 }
-  let(:demtype) { "ANADEM" }
+  let(:dataset_name) { "USGS30m" }
   let(:output_format) { "GTiff" }
 
   describe "parameters validation" do
@@ -27,15 +27,16 @@ RSpec.describe OpenTopo::Net::Params::Contracts::GlobaldemContract do
     context "when all parameters are valid" do
       it "is successful" do
         expect(validation_result).to be_success
+        expect(validation_result.errors.to_h).to be_empty
       end
     end
 
-    context "when demtype is invalid" do
-      let(:demtype) { "invalid" }
+    context "when dataset name is invalid" do
+      let(:dataset_name) { "invalid" }
 
       it "is not successful" do
         expect(validation_result).to be_failure
-        expect(validation_result.errors.to_h).to eq({demtype: ["must be a valid DEM type"]})
+        expect(validation_result.errors.to_h).to eq({datasetName: ["must be a valid DEM type"]})
       end
     end
 
