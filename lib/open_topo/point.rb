@@ -10,6 +10,8 @@ module OpenTopo
     alias_method :latitude, :lat
 
     attr_reader :heigh
+    alias_method :elevation, :heigh
+
     attr_reader :unit
 
     def initialize(long:, lat:, heigh: nil, unit: "m")

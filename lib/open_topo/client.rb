@@ -13,7 +13,7 @@ module OpenTopo
       params = Net::Params::GlobaldemParams.new(south:, north:, west:, east:, demtype:, output_format:)
       params.validate!
 
-      response = @request.globaldem(params)
+      response = request.globaldem(params)
 
       if response.success?
         Services::ResponseToDemConverter.call(response, dem_type: demtype, output_format:)
@@ -26,7 +26,7 @@ module OpenTopo
       params = Net::Params::UsgsdemParams.new(south:, north:, west:, east:, dataset_name:, output_format:)
       params.validate!
 
-      response = @request.usgsdem(params)
+      response = request.usgsdem(params)
 
       if response.success?
         Services::ResponseToDemConverter.call(response, dem_type: dataset_name, output_format:)
@@ -39,7 +39,7 @@ module OpenTopo
       params = Net::Params::ElevationParams.new(long:, lat:, dataset:)
       params.validate!
 
-      response = @request.elevation(params)
+      response = request.elevation(params)
 
       if response.success?
         Services::ResponseToPointConverter.call(response)
@@ -47,5 +47,9 @@ module OpenTopo
         raise ::OpenTopo::Errors::ResponseError, response.body
       end
     end
+
+    private
+
+    attr_reader :request
   end
 end
