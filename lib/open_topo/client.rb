@@ -48,6 +48,9 @@ module OpenTopo
       end
     end
 
+    def catalog(south:, north:, west:, east:, polygon:)
+    end
+
     private
 
     attr_reader :request
