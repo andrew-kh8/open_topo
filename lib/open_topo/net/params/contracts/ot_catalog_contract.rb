@@ -8,15 +8,16 @@ module OpenTopo
       module Contracts
         class OtCatalogContract < ::Dry::Validation::Contract
           params do
-            optional(:productFormat).filled(:string)
-            optional(:minx).filled(:float, gt?: -180, lt?: 180)
-            optional(:miny).filled(:float, gt?: -90, lt?: 90)
-            optional(:maxx).filled(:float, gt?: -180, lt?: 180)
-            optional(:maxy).filled(:float, gt?: -90, lt?: 90)
+            optional(:minx).filled(:float, gteq?: -180, lteq?: 180)
+            optional(:miny).filled(:float, gteq?: -90, lteq?: 90)
+            optional(:maxx).filled(:float, gteq?: -180, lteq?: 180)
+            optional(:maxy).filled(:float, gteq?: -90, lteq?: 90)
             optional(:polygon).filled(:string)
-            optional(:detail).filled(:bool)
-            optional(:outputFormat).filled(:string)
-            optional(:include_federated).filled(:bool)
+
+            required(:productFormat).filled(:string)
+            required(:detail).filled(:bool)
+            required(:outputFormat).filled(:string)
+            required(:include_federated).filled(:bool)
           end
 
           rule(:polygon, :minx, :miny, :maxx, :maxy) do
@@ -30,23 +31,25 @@ module OpenTopo
 
           rule(:minx, :maxx) do
             next if values[:polygon]
-            next if values[:minx].nil? || values[:maxx].nil?
 
             key(:minx).failure("must be less than maxx (#{values[:maxx]})") if values[:minx] >= values[:maxx]
           end
 
           rule(:miny, :maxy) do
             next if values[:polygon]
-            next if values[:miny].nil? || values[:maxy].nil?
 
             key(:miny).failure("must be less than maxy (#{values[:maxy]})") if values[:miny] >= values[:maxy]
           end
 
-          rule(:productFormat) do
-            next if value.nil?
+          rule(:minx, :miny, :maxx, :maxy) do
+            next if values[:polygon]
 
-            key.failure("must be a valid product format") unless Params::OtCatalogParams::PRODUCT_FORMATS.value?(value)
+            values.each do |key, value|
+              key.failure("must be provided") if value.nil?
+            end
           end
+
+          # rule for polygon
         end
       end
     end

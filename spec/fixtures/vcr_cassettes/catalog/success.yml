@@ -1,0 +1,175 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://portal.opentopography.org/API/otCatalog?API_Key=<OPEN_TOPOGRAPHY_API_KEY>&detail=false&include_federated=false&maxx=121.5&maxy=84.5&minx=121&miny=84&outputFormat=xml&productFormat=Raster
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/octet-stream,application/json,application/xml
+      User-Agent:
+      - Ruby open_topo v0.1.0
+  response:
+    status:
+      code: 200
+      message: '200'
+    headers:
+      date:
+      - Sat, 29 Aug 2026 13:07:07 GMT
+      server:
+      - Apache
+      vary:
+      - Accept-Encoding
+      access-control-allow-origin:
+      - "*"
+      transfer-encoding:
+      - chunked
+      content-type:
+      - application/xml
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <Datasets><Dataset>
+        <name>GEBCO Global Bathymetry and Topography</name>
+        <identifier><type>PropertyValue</type><propertyID>opentopoID</propertyID><value>OTSDEM.122023.4326.1</value></identifier>
+        <alternateName>GEBCOIceTopo</alternateName>
+        <url>https://doi.org/10.5069/G9D21VTT</url>
+        <fileFormat>Raster</fileFormat>
+        <dateCreated>2024-03-08</dateCreated>
+        <temporalCoverage>2000-02-11 / 2023-04-01</temporalCoverage>
+        <spatialCoverage>
+          <type>Place</type>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Horizontal Coordinates</name>
+            <value>WGS84</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Vertical Coordinates</name>
+            <value>Mean Sea Level</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Vertical)</name>
+            <value>9705</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Horizontal)</name>
+            <value>4326</value>
+          </additionalProperty>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Area</name>
+            <value>510064480 km2</value>
+          </variableMeasured>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Unit</name>
+            <value>meter</value>
+          </variableMeasured>
+        </spatialCoverage>
+        </Dataset>
+        <Dataset>
+        <name>GEBCO Global Bathymetry and Topography Including Basal Ice Surface</name>
+        <identifier><type>PropertyValue</type><propertyID>opentopoID</propertyID><value>OTSDEM.122023.4326.2</value></identifier>
+        <alternateName>GEBCOSubIceTopo</alternateName>
+        <url>https://doi.org/10.5069/G9D21VTT</url>
+        <fileFormat>Raster</fileFormat>
+        <dateCreated>2024-03-08</dateCreated>
+        <temporalCoverage>2000-02-11 / 2023-04-01</temporalCoverage>
+        <spatialCoverage>
+          <type>Place</type>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Horizontal Coordinates</name>
+            <value>WGS84</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Vertical Coordinates</name>
+            <value>Mean Sea Level</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Vertical)</name>
+            <value>9705</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Horizontal)</name>
+            <value>4326</value>
+          </additionalProperty>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Area</name>
+            <value>510064480 km2</value>
+          </variableMeasured>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Unit</name>
+            <value>meter</value>
+          </variableMeasured>
+        </spatialCoverage>
+        </Dataset>
+        <Dataset>
+        <name>Global Bathymetry and Topography at 15 Arc Sec: SRTM15+ V2.5.5</name>
+        <identifier><type>PropertyValue</type><propertyID>opentopoID</propertyID><value>OTSRTM.122019.4326.1</value></identifier>
+        <alternateName>SRTM15Plus</alternateName>
+        <url>https://doi.org/10.5069/G92R3PT9</url>
+        <fileFormat>Raster</fileFormat>
+        <dateCreated>2020-12-10</dateCreated>
+        <temporalCoverage>2000-02-11 / 2023-03-20</temporalCoverage>
+        <spatialCoverage>
+          <type>Place</type>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Horizontal Coordinates</name>
+            <value>WGS84</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Vertical Coordinates</name>
+            <value>WGS84 Ellipsoid/EGM1996 Geoid</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Vertical)</name>
+            <value>5773</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Horizontal)</name>
+            <value>4326</value>
+          </additionalProperty>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Area</name>
+            <value>509753760 km2</value>
+          </variableMeasured>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Unit</name>
+            <value>meter</value>
+          </variableMeasured>
+        </spatialCoverage>
+        </Dataset>
+        </Datasets>
+  recorded_at: Sat, 29 Aug 2026 13:07:07 GMT
+recorded_with: VCR 6.4.0

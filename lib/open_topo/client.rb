@@ -48,7 +48,17 @@ module OpenTopo
       end
     end
 
-    def catalog(south:, north:, west:, east:, polygon:)
+    def catalog(west: nil, south: nil, east: nil, north: nil, polygon: nil)
+      params = Net::Params::OtCatalogParams.new(west:, south:, east:, north:, polygon:)
+      params.validate!
+
+      response = request.catalog(params)
+
+      if response.success?
+        Services::ResponseToCatalogListConverter.call(response.body)
+      else
+        raise ::OpenTopo::Errors::ResponseError, response.body
+      end
     end
 
     private

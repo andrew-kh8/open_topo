@@ -27,3 +27,7 @@ All of federated datasets have no `alternateName` or something like that, so now
 there's no opportunity to get request for their data.
 
 Investigate it in future
+
+#### product format
+
+set productFormat to "Raster", because there's no opportunity to request data of point cloud datasets

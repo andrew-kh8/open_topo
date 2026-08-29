@@ -4,14 +4,11 @@ module OpenTopo
   module Net
     module Params
       class OtCatalogParams < BaseParams
-        PRODUCT_FORMATS = {point_cloud: "PointCloud", raster: "Raster"}
-
         validate_with Contracts::OtCatalogContract
 
-        attr_reader :product_format, :west, :south, :east, :north, :polygon
+        attr_reader :west, :south, :east, :north, :polygon
 
-        def initialize(product_format: nil, west: nil, south: nil, east: nil, north: nil, polygon: nil)
-          @product_format = product_format # ???
+        def initialize(west: nil, south: nil, east: nil, north: nil, polygon: nil)
           @west = west
           @south = south
           @east = east
@@ -22,15 +19,7 @@ module OpenTopo
         end
 
         def to_params
-          params = {
-            outputFormat: "xml",
-            detail: false,
-            include_federated: false
-          }
-
-          if product_format
-            params[:productFormat] = PRODUCT_FORMATS[product_format.to_sym]
-          end
+          params = default_params
 
           if polygon
             params[:polygon] = polygon
@@ -42,6 +31,17 @@ module OpenTopo
           end
 
           params
+        end
+
+        private
+
+        def default_params
+          {
+            outputFormat: "xml",
+            detail: false,
+            include_federated: false,
+            productFormat: "Raster"
+          }
         end
       end
     end
