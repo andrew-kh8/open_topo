@@ -53,6 +53,8 @@ module OpenTopo
             next if values[:polygon]
 
             missing = COORDS.keys.select { |key| values[key].nil? }
+            next if missing.size == COORDS.size
+
             missing.each do |key, value|
               key(COORDS[key]).failure("must be provided") if value.nil?
             end
