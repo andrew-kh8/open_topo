@@ -49,7 +49,7 @@ module OpenTopo
     end
 
     def catalog(west: nil, south: nil, east: nil, north: nil, polygon: nil)
-      params = Net::Params::OtCatalogParams.new(west:, south:, east:, north:, polygon:)
+      params = Net::Params::CatalogParams.new(west:, south:, east:, north:, polygon:)
       params.validate!
 
       response = request.catalog(params)

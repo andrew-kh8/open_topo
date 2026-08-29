@@ -1,0 +1,36 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://portal.opentopography.org/API/otCatalog?API_Key=<OPEN_TOPOGRAPHY_API_KEY>&detail=false&include_federated=false&outputFormat=xml&polygon=-117.5%2C32.5%2C-117.0%2C32.3%2C-117.5%2C32.5&productFormat=Raster
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/octet-stream,application/json,application/xml
+      User-Agent:
+      - Ruby open_topo v0.1.0
+  response:
+    status:
+      code: 400
+      message: '400'
+    headers:
+      date:
+      - Sat, 29 Aug 2026 15:46:20 GMT
+      server:
+      - Apache
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - close
+      transfer-encoding:
+      - chunked
+      content-type:
+      - application/xml
+    body:
+      encoding: UTF-8
+      string: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><error>Error:
+        Invalid geometry format: -117.5,32.5,-117.0,32.3,-117.5,32.5</error>'
+  recorded_at: Sat, 29 Aug 2026 15:46:21 GMT
+recorded_with: VCR 6.4.0

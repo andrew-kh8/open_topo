@@ -3,8 +3,8 @@
 module OpenTopo
   module Net
     module Params
-      class OtCatalogParams < BaseParams
-        validate_with Contracts::OtCatalogContract
+      class CatalogParams < BaseParams
+        validate_with Contracts::CatalogContract
 
         attr_reader :west, :south, :east, :north, :polygon
 
@@ -24,10 +24,11 @@ module OpenTopo
           if polygon
             params[:polygon] = polygon
           else
-            params[:minx] = west
-            params[:miny] = south
             params[:maxx] = east
+            params[:minx] = west
+
             params[:maxy] = north
+            params[:miny] = south
           end
 
           params
