@@ -39,6 +39,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dry-validation", ">= 1.11"
   spec.add_dependency "zeitwerk"
   spec.add_dependency "csv", ">= 3.3"
+  spec.add_dependency "oj", ">= 3.17"
 
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "standard", "~> 1.3"

@@ -2,6 +2,7 @@
 
 require "faraday"
 require "faraday_middleware"
+require "oj"
 
 module OpenTopo
   module Net
@@ -18,7 +19,7 @@ module OpenTopo
 
       BASE_URL = "https://portal.opentopography.org"
       XML_CONTENT_TYPE = "application/xml"
-      ACCEPT_CONTENT_TYPE = "application/octet-stream,#{XML_CONTENT_TYPE}"
+      ACCEPT_CONTENT_TYPE = "application/octet-stream,application/json,#{XML_CONTENT_TYPE}"
 
       attr_reader :api_key
 
@@ -27,6 +28,7 @@ module OpenTopo
           faraday.request :url_encoded
           faraday.response :logger
           faraday.response :xml, content_type: XML_CONTENT_TYPE
+          faraday.response :json, parser_options: {decoder: Oj, symbolize_names: true}
           faraday.adapter Faraday.default_adapter
         end
       end

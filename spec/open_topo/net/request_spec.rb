@@ -30,4 +30,60 @@ RSpec.describe OpenTopo::Net::Request do
       end
     end
   end
+
+  describe "#usgsdem" do
+    subject(:usgsdem) { instance.usgsdem(params) }
+
+    context "with valid parameters" do
+      let(:params) { build(:usgsdem_params) }
+
+      it "returns a Response object" do
+        VCR.use_cassette("usgsdem/success_request") do
+          expect(usgsdem).to be_a(OpenTopo::Net::Response)
+          expect(usgsdem.status).to eq 200
+          expect(usgsdem.body).to be_a(String)
+        end
+      end
+    end
+
+    context "with invalid parameters" do
+      let(:params) { build(:usgsdem_params, south: 40.489999) }
+
+      it "returns a Response object" do
+        VCR.use_cassette("usgsdem/failure_small_area") do
+          expect(usgsdem).to be_a(OpenTopo::Net::Response)
+          expect(usgsdem.status).to eq 400
+          expect(usgsdem.body).to be_a(Hash)
+        end
+      end
+    end
+  end
+
+  describe "#elevation" do
+    subject(:elevation) { instance.elevation(params) }
+
+    context "with valid parameters" do
+      let(:params) { build(:elevation_params) }
+
+      it "returns a Response object" do
+        VCR.use_cassette("elevation/success_request") do
+          expect(elevation).to be_a(OpenTopo::Net::Response)
+          expect(elevation.status).to eq 200
+          expect(elevation.body).to be_a(Hash)
+        end
+      end
+    end
+
+    context "with invalid parameters" do
+      let(:params) { build(:elevation_params, long: 200) }
+
+      it "returns a Response object" do
+        VCR.use_cassette("elevation/failure_request") do
+          expect(elevation).to be_a(OpenTopo::Net::Response)
+          expect(elevation.status).to eq 400
+          expect(elevation.body).to be_a(Hash)
+        end
+      end
+    end
+  end
 end

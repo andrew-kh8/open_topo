@@ -88,4 +88,51 @@ RSpec.describe OpenTopo::Client do
       end
     end
   end
+
+  describe "#elevation" do
+    context "with valid parameters" do
+      let(:elevation) { instance.elevation(long: params.long, lat: params.lat) }
+      let(:param_class) { OpenTopo::Net::Params::ElevationParams }
+      let(:params) { build(:elevation_params, long: -1.6028, lat: 51.0176) }
+      let(:request) { double }
+      let(:response) { double(success?: true, body: {elevation: 100}) }
+      let(:point) { build(:point, heigh: 100) }
+
+      it "returns a Point" do
+        expect(param_class).to receive(:new).with(long: params.long, lat: params.lat, dataset: :srtmgl3).and_return(params)
+        expect(params).to receive(:validate!).and_return(true)
+
+        expect(instance).to receive(:request).and_return(request)
+        expect(request).to receive(:elevation).with(params).and_return(response)
+        expect(OpenTopo::Services::ResponseToPointConverter).to receive(:call).with(response).and_return(point)
+
+        VCR.use_cassette("elevation/success_request") do
+          expect(elevation).to be_a(OpenTopo::Point)
+          expect(elevation).to eq(point)
+        end
+      end
+    end
+
+    context "with invalid parameters" do
+      context "when the parameters are validated with failure" do
+        let(:elevation) { instance.elevation(long: 200, lat: 51.0176) }
+        let(:error_message) { "Invalid parameters: longitude must be less than or equal to 180" }
+
+        it "raises an error" do
+          expect { elevation }.to raise_error(OpenTopo::Errors::ParamsError, error_message)
+        end
+      end
+
+      context "when request fails" do
+        let(:elevation) { instance.elevation(long: -150, lat: 50) }
+        let(:error_message) { "Not found" }
+
+        it "raises an error" do
+          VCR.use_cassette("elevation/failure_no_data") do
+            expect { elevation }.to raise_error(OpenTopo::Errors::ResponseError, error_message)
+          end
+        end
+      end
+    end
+  end
 end

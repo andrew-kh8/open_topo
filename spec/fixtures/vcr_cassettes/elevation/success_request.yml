@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://portal.opentopography.org/API/v1/elevation?API_Key=<OPEN_TOPOGRAPHY_API_KEY>&dataset=SRTM_GL3&latitude=51.0176&longitude=-1.6028
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/octet-stream,application/json,application/xml
+      User-Agent:
+      - Ruby open_topo v0.1.0
+  response:
+    status:
+      code: 200
+      message: '200'
+    headers:
+      date:
+      - Thu, 27 Aug 2026 17:56:41 GMT
+      server:
+      - Apache
+      access-control-allow-origin:
+      - "*"
+      transfer-encoding:
+      - chunked
+      content-type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"Status": "Success", "Message": "Elevation successfully retrieved.",
+        "Elevation": 93.0, "Location": {"Latitude": 51.0176, "Longitude": -1.6028},
+        "Unit": "Meters", "VCRS_WKT": "VERTCRS[\"EGM96 height\",\n    VDATUM[\"EGM96
+        geoid\"],\n    CS[vertical,1],\n        AXIS[\"gravity-related height (H)\",up,\n            LENGTHUNIT[\"metre\",1]],\n    USAGE[\n        SCOPE[\"Geodesy.\"],\n        AREA[\"World.\"],\n        BBOX[-90,-180,90,180]],\n    ID[\"EPSG\",5773]]",
+        "VCRS_EPSG": "5773", "Reference Dataset": "SRTM_GL3"}'
+  recorded_at: Thu, 27 Aug 2026 17:56:42 GMT
+recorded_with: VCR 6.4.0
