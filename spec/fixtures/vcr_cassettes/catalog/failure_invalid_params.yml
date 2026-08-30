@@ -1,0 +1,36 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://portal.opentopography.org/API/otCatalog?API_Key=<OPEN_TOPOGRAPHY_API_KEY>&detail=false&include_federated=false&maxx=121&maxy=84.5&minx=121&miny=84&outputFormat=xml&productFormat=Raster
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/octet-stream,application/json,application/xml
+      User-Agent:
+      - Ruby open_topo v0.1.0
+  response:
+    status:
+      code: 400
+      message: '400'
+    headers:
+      date:
+      - Sun, 30 Aug 2026 18:52:34 GMT
+      server:
+      - Apache
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - close
+      transfer-encoding:
+      - chunked
+      content-type:
+      - application/xml
+    body:
+      encoding: UTF-8
+      string: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><error>Error:
+        Max Y must be greater than Min Y, and Max X must not be equal to Min X.</error>'
+  recorded_at: Sun, 30 Aug 2026 18:52:34 GMT
+recorded_with: VCR 6.4.0
