@@ -135,4 +135,38 @@ RSpec.describe OpenTopo::Client do
       end
     end
   end
+
+  describe "#catalog" do
+    subject { instance.catalog(west:, south:, east:, north:, polygon:) }
+
+    let(:west) { nil }
+    let(:south) { nil }
+    let(:east) { nil }
+    let(:north) { nil }
+    let(:polygon) { nil }
+
+    let(:params_class) { instance_double(OpenTopo::Net::Params::CatalogParams) }
+    let(:params) { build(:catalog_params) }
+
+    context "with valid params" do
+      let(:north) { 84.5 }
+      let(:south) { 84 }
+      let(:west) { 121 }
+      let(:east) { 121.5 }
+      let(:request) { double }
+      let(:response) { double(success?: true, body: {}) }
+      let(:catalog_list) { [] }
+
+      it "returns catalog list" do
+        expect(OpenTopo::Net::Params::CatalogParams).to receive(:new).with(west:, south:, east:, north:, polygon:).and_return(params)
+        expect(params).to receive(:validate!).and_return(true)
+
+        expect(instance).to receive(:request).and_return(request)
+        expect(request).to receive(:catalog).with(params).and_return(response)
+        expect(OpenTopo::Services::ResponseToCatalogListConverter).to receive(:call).with(response.body).and_return(catalog_list)
+
+        subject
+      end
+    end
+  end
 end

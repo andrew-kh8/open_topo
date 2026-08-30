@@ -38,10 +38,10 @@ module OpenTopo
 
         def default_params
           {
+            productFormat: "Raster",
             outputFormat: "xml",
             detail: false,
-            include_federated: false,
-            productFormat: "Raster"
+            include_federated: false
           }
         end
       end
