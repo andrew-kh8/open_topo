@@ -90,4 +90,86 @@ RSpec.describe OpenTopo::Net::Params::Contracts::CatalogContract do
       end
     end
   end
+
+  describe "minx must be less than maxx rule" do
+    context "when minx less maxx" do
+      it { expect(validation_result).to be_success }
+    end
+
+    context "when minx is eq maxx" do
+      let(:minx) { maxx }
+
+      it "returns message for west" do
+        expect(validation_result).to be_failure
+        expect(validation_result.errors.to_h[:west]).to include("must be less than east (#{maxx})")
+      end
+    end
+
+    context "when minx greater than maxx" do
+      let(:minx) { maxx + 1 }
+
+      it "returns message for west" do
+        expect(validation_result).to be_failure
+        expect(validation_result.errors.to_h[:west]).to include("must be less than east (#{maxx})")
+      end
+    end
+  end
+
+  describe "miny must be less than maxy rule" do
+    context "when miny less maxy" do
+      it { expect(validation_result).to be_success }
+    end
+
+    context "when miny is eq maxy" do
+      let(:miny) { maxy }
+
+      it "returns message for south" do
+        expect(validation_result).to be_failure
+        expect(validation_result.errors.to_h[:south]).to include("must be less than north (#{maxy})")
+      end
+    end
+
+    context "when miny greater than maxy" do
+      let(:miny) { maxy + 1 }
+
+      it "returns message for south" do
+        expect(validation_result).to be_failure
+        expect(validation_result.errors.to_h[:south]).to include("must be less than north (#{maxy})")
+      end
+    end
+  end
+
+  describe "every coord must be provided rule" do
+    context "when minx is empty" do
+      let(:minx) { nil }
+      it { expect(validation_result.errors.to_h[:west]).to eq(["must be provided"]) }
+    end
+
+    context "when minx is empty" do
+      let(:miny) { nil }
+      it { expect(validation_result.errors.to_h[:south]).to eq(["must be provided"]) }
+    end
+
+    context "when maxx is empty" do
+      let(:maxx) { nil }
+      it { expect(validation_result.errors.to_h[:east]).to eq(["must be provided"]) }
+    end
+
+    context "when maxy is empty" do
+      let(:maxy) { nil }
+      it { expect(validation_result.errors.to_h[:north]).to eq(["must be provided"]) }
+    end
+
+    context "when minx maxx are empty" do
+      let(:minx) { nil }
+      let(:maxx) { nil }
+
+      it "returns message only for 2 coords" do
+        expect(validation_result.errors.to_h[:west]).to eq(["must be provided"])
+        expect(validation_result.errors.to_h[:east]).to eq(["must be provided"])
+        expect(validation_result.errors.to_h).not_to have_key(:south)
+        expect(validation_result.errors.to_h).not_to have_key(:north)
+      end
+    end
+  end
 end
