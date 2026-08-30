@@ -139,33 +139,46 @@ RSpec.describe OpenTopo::Client do
   describe "#catalog" do
     subject { instance.catalog(west:, south:, east:, north:, polygon:) }
 
-    let(:west) { nil }
-    let(:south) { nil }
-    let(:east) { nil }
-    let(:north) { nil }
-    let(:polygon) { nil }
-
-    let(:params_class) { instance_double(OpenTopo::Net::Params::CatalogParams) }
+    # let(:params_class) { instance_double(OpenTopo::Net::Params::CatalogParams) }
     let(:params) { build(:catalog_params) }
+    let(:north) { 84.5 }
+    let(:south) { 84 }
+    let(:west) { 121 }
+    let(:east) { 121.5 }
+    let(:polygon) { nil }
+    let(:request) { instance_double(OpenTopo::Net::Request) }
+    let(:response) { instance_double(OpenTopo::Net::Response, success?: response_success, body: response_body) }
+    let(:response_body) { {foo: "bar"} }
 
-    context "with valid params" do
-      let(:north) { 84.5 }
-      let(:south) { 84 }
-      let(:west) { 121 }
-      let(:east) { 121.5 }
-      let(:request) { double }
-      let(:response) { double(success?: true, body: {}) }
+    context "when response is success" do
       let(:catalog_list) { [] }
+      let(:response_success) { true }
 
       it "returns catalog list" do
-        expect(OpenTopo::Net::Params::CatalogParams).to receive(:new).with(west:, south:, east:, north:, polygon:).and_return(params)
-        expect(params).to receive(:validate!).and_return(true)
+        expect(OpenTopo::Net::Params::CatalogParams).to receive(:new).with(west:, south:, east:, north:, polygon:).and_return(params).ordered
+        expect(params).to receive(:validate!).and_return(true).ordered
 
-        expect(instance).to receive(:request).and_return(request)
-        expect(request).to receive(:catalog).with(params).and_return(response)
-        expect(OpenTopo::Services::ResponseToCatalogListConverter).to receive(:call).with(response.body).and_return(catalog_list)
+        expect(instance).to receive(:request).and_return(request).ordered
+        expect(request).to receive(:catalog).with(params).and_return(response).ordered
+        expect(OpenTopo::Services::ResponseToCatalogListConverter).to receive(:call).with(response.body).and_return(catalog_list).ordered
 
         subject
+      end
+    end
+
+    context "when response is failure" do
+      let(:response_success) { false }
+
+      it "raises an error" do
+        expect(OpenTopo::Net::Params::CatalogParams).to receive(:new).with(west:, south:, east:, north:, polygon:).and_return(params).ordered
+        expect(params).to receive(:validate!).and_return(true).ordered
+
+        expect(instance).to receive(:request).and_return(request).ordered
+        expect(request).to receive(:catalog).with(params).and_return(response).ordered
+
+        expect(OpenTopo::Services::ResponseToCatalogListConverter).not_to receive(:call).ordered
+
+        expect { subject }.to raise_error(OpenTopo::Errors::ResponseError, response_body.to_s)
       end
     end
   end
