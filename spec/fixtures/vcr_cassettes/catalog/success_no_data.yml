@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://portal.opentopography.org/API/otCatalog?API_Key=<OPEN_TOPOGRAPHY_API_KEY>&detail=false&include_federated=false&maxx=121.5&maxy=89.5&minx=121&miny=89&outputFormat=xml&productFormat=Raster
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/octet-stream,application/json,application/xml
+      User-Agent:
+      - Ruby open_topo v0.1.0
+  response:
+    status:
+      code: 200
+      message: '200'
+    headers:
+      date:
+      - Sat, 29 Aug 2026 15:10:32 GMT
+      server:
+      - Apache
+      vary:
+      - Accept-Encoding
+      access-control-allow-origin:
+      - "*"
+      transfer-encoding:
+      - chunked
+      content-type:
+      - application/xml
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <Datasets></Datasets>
+  recorded_at: Sat, 29 Aug 2026 15:10:32 GMT
+recorded_with: VCR 6.4.0

@@ -33,7 +33,7 @@ module OpenTopo
         end
 
         def error_messages
-          if !validation_result.nil? && validation_result.failure?
+          if !validation_result.nil? && !validation_result.success?
             validation_result.errors(full: true).messages.map(&:text)
           else
             []

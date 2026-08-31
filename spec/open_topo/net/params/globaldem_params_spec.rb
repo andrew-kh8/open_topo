@@ -10,6 +10,8 @@ RSpec.describe OpenTopo::Net::Params::GlobaldemParams do
   let(:demtype) { :anadem }
   let(:output_format) { :tif }
 
+  include_examples "Params validation", OpenTopo::Net::Params::Contracts::GlobaldemContract
+
   describe "#to_params, #to_h" do
     let(:expected_params) do
       {
@@ -28,39 +30,6 @@ RSpec.describe OpenTopo::Net::Params::GlobaldemParams do
 
     it "returns a hash with the correct keys and values" do
       expect(instance.to_h).to eq(expected_params)
-    end
-  end
-
-  describe "#validate!" do
-    context "when the parameters are valid" do
-      it "does not raise an error" do
-        expect { instance.validate! }.not_to raise_error
-      end
-    end
-
-    context "when the parameters are invalid" do
-      let(:south) { -100.0 }
-      let(:error_message) { "Invalid parameters: south must be greater than -90" }
-
-      it "raises a ParamsError with the correct error messages" do
-        expect { instance.validate! }.to raise_error(OpenTopo::Errors::ParamsError, error_message)
-      end
-    end
-  end
-
-  describe "#valid?" do
-    context "when the parameters are valid" do
-      it "returns true" do
-        expect(instance.valid?).to eq true
-      end
-    end
-
-    context "when the parameters are invalid" do
-      let(:south) { -100.0 }
-
-      it "returns false" do
-        expect(instance.valid?).to eq false
-      end
     end
   end
 

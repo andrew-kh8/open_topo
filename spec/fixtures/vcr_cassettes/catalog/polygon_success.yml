@@ -1,0 +1,635 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://portal.opentopography.org/API/otCatalog?API_Key=<OPEN_TOPOGRAPHY_API_KEY>&detail=false&include_federated=false&outputFormat=xml&polygon=-117.5%2C32.5%2C-117.5%2C33.1%2C-116.7%2C33.1%2C-116.7%2C32.5%2C-117.0%2C32.3%2C-117.5%2C32.5&productFormat=Raster
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/octet-stream,application/json,application/xml
+      User-Agent:
+      - Ruby open_topo v0.1.0
+  response:
+    status:
+      code: 200
+      message: '200'
+    headers:
+      date:
+      - Sat, 29 Aug 2026 15:44:12 GMT
+      server:
+      - Apache
+      vary:
+      - Accept-Encoding
+      access-control-allow-origin:
+      - "*"
+      transfer-encoding:
+      - chunked
+      content-type:
+      - application/xml
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <Datasets><Dataset>
+        <name>Global Ensemble Digital Terrain Model</name>
+        <identifier><type>PropertyValue</type><propertyID>opentopoID</propertyID><value>OTSDEM.082025.4326.1</value></identifier>
+        <alternateName>GEDTM30</alternateName>
+        <url>https://doi.org/10.5069/G9BV7DT1</url>
+        <fileFormat>Raster</fileFormat>
+        <dateCreated>2025-08-04</dateCreated>
+        <temporalCoverage>2006-01-01 / 2015-12-31</temporalCoverage>
+        <spatialCoverage>
+          <type>Place</type>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Horizontal Coordinates</name>
+            <value>WGS84</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Vertical Coordinates</name>
+            <value>WGS84 Ellipsoid/EGM2008 Geoid</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Vertical)</name>
+            <value>3855</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Horizontal)</name>
+            <value>4326</value>
+          </additionalProperty>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Area</name>
+            <value>134468240 km2</value>
+          </variableMeasured>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Unit</name>
+            <value>meter</value>
+          </variableMeasured>
+        </spatialCoverage>
+        </Dataset>
+        <Dataset>
+        <name>GEBCO Global Bathymetry and Topography</name>
+        <identifier><type>PropertyValue</type><propertyID>opentopoID</propertyID><value>OTSDEM.122023.4326.1</value></identifier>
+        <alternateName>GEBCOIceTopo</alternateName>
+        <url>https://doi.org/10.5069/G9D21VTT</url>
+        <fileFormat>Raster</fileFormat>
+        <dateCreated>2024-03-08</dateCreated>
+        <temporalCoverage>2000-02-11 / 2023-04-01</temporalCoverage>
+        <spatialCoverage>
+          <type>Place</type>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Horizontal Coordinates</name>
+            <value>WGS84</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Vertical Coordinates</name>
+            <value>Mean Sea Level</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Vertical)</name>
+            <value>9705</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Horizontal)</name>
+            <value>4326</value>
+          </additionalProperty>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Area</name>
+            <value>510064480 km2</value>
+          </variableMeasured>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Unit</name>
+            <value>meter</value>
+          </variableMeasured>
+        </spatialCoverage>
+        </Dataset>
+        <Dataset>
+        <name>GEBCO Global Bathymetry and Topography Including Basal Ice Surface</name>
+        <identifier><type>PropertyValue</type><propertyID>opentopoID</propertyID><value>OTSDEM.122023.4326.2</value></identifier>
+        <alternateName>GEBCOSubIceTopo</alternateName>
+        <url>https://doi.org/10.5069/G9D21VTT</url>
+        <fileFormat>Raster</fileFormat>
+        <dateCreated>2024-03-08</dateCreated>
+        <temporalCoverage>2000-02-11 / 2023-04-01</temporalCoverage>
+        <spatialCoverage>
+          <type>Place</type>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Horizontal Coordinates</name>
+            <value>WGS84</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Vertical Coordinates</name>
+            <value>Mean Sea Level</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Vertical)</name>
+            <value>9705</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Horizontal)</name>
+            <value>4326</value>
+          </additionalProperty>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Area</name>
+            <value>510064480 km2</value>
+          </variableMeasured>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Unit</name>
+            <value>meter</value>
+          </variableMeasured>
+        </spatialCoverage>
+        </Dataset>
+        <Dataset>
+        <name>Global Ecosystem Dynamics Investigation (GEDI) L3 Gridded Land Surface Metrics</name>
+        <identifier><type>PropertyValue</type><propertyID>opentopoID</propertyID><value>OTSDEM.032022.4326.1</value></identifier>
+        <alternateName>GEDI_L3</alternateName>
+        <url>https://doi.org/10.5069/G9V12301</url>
+        <fileFormat>Raster</fileFormat>
+        <dateCreated>2023-02-13</dateCreated>
+        <temporalCoverage>2019-04-18 / 2022-01-19</temporalCoverage>
+        <spatialCoverage>
+          <type>Place</type>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Horizontal Coordinates</name>
+            <value>WGS84</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Vertical Coordinates</name>
+            <value>WGS84 Ellipsoid</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Vertical)</name>
+            <value>4979</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Horizontal)</name>
+            <value>4326</value>
+          </additionalProperty>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Area</name>
+            <value>106879880 km2</value>
+          </variableMeasured>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Unit</name>
+            <value>meter</value>
+          </variableMeasured>
+        </spatialCoverage>
+        </Dataset>
+        <Dataset>
+        <name>Copernicus GLO-90 Digital Elevation Model</name>
+        <identifier><type>PropertyValue</type><propertyID>opentopoID</propertyID><value>OTSDEM.032021.4326.1</value></identifier>
+        <alternateName>COP90</alternateName>
+        <url>https://doi.org/10.5069/G9028PQB</url>
+        <fileFormat>Raster</fileFormat>
+        <dateCreated>2021-04-22</dateCreated>
+        <temporalCoverage>2011-01-01 / 2015-07-01</temporalCoverage>
+        <spatialCoverage>
+          <type>Place</type>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Horizontal Coordinates</name>
+            <value>WGS84</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Vertical Coordinates</name>
+            <value>WGS84 Ellipsoid/EGM2008 Geoid</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Vertical)</name>
+            <value>3855</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Horizontal)</name>
+            <value>4326</value>
+          </additionalProperty>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Area</name>
+            <value>184190608 km2</value>
+          </variableMeasured>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Unit</name>
+            <value>meter</value>
+          </variableMeasured>
+        </spatialCoverage>
+        </Dataset>
+        <Dataset>
+        <name>Copernicus GLO-30 Digital Elevation Model</name>
+        <identifier><type>PropertyValue</type><propertyID>opentopoID</propertyID><value>OTSDEM.032021.4326.3</value></identifier>
+        <alternateName>COP30</alternateName>
+        <url>https://doi.org/10.5069/G9028PQB</url>
+        <fileFormat>Raster</fileFormat>
+        <dateCreated>2021-04-22</dateCreated>
+        <temporalCoverage>2011-01-01 / 2015-07-01</temporalCoverage>
+        <spatialCoverage>
+          <type>Place</type>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Horizontal Coordinates</name>
+            <value>WGS84</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Vertical Coordinates</name>
+            <value>WGS84 Ellipsoid/EGM2008 Geoid</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Vertical)</name>
+            <value>3855</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Horizontal)</name>
+            <value>4326</value>
+          </additionalProperty>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Area</name>
+            <value>184190608 km2</value>
+          </variableMeasured>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Unit</name>
+            <value>meter</value>
+          </variableMeasured>
+        </spatialCoverage>
+        </Dataset>
+        <Dataset>
+        <name>NASADEM Global Digital Elevation Model</name>
+        <identifier><type>PropertyValue</type><propertyID>opentopoID</propertyID><value>OTSDEM.032021.4326.2</value></identifier>
+        <alternateName>NASADEM</alternateName>
+        <url>https://doi.org/10.5069/G93T9FD9</url>
+        <fileFormat>Raster</fileFormat>
+        <dateCreated>2021-04-22</dateCreated>
+        <temporalCoverage>2000-02-11 / 2000-02-21</temporalCoverage>
+        <spatialCoverage>
+          <type>Place</type>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Horizontal Coordinates</name>
+            <value>WGS84</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Vertical Coordinates</name>
+            <value>WGS84 Ellipsoid/EGM1996 Geoid</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Vertical)</name>
+            <value>5773</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Horizontal)</name>
+            <value>4326</value>
+          </additionalProperty>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Area</name>
+            <value>147385568 km2</value>
+          </variableMeasured>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Unit</name>
+            <value>meter</value>
+          </variableMeasured>
+        </spatialCoverage>
+        </Dataset>
+        <Dataset>
+        <name>Global Bathymetry and Topography at 15 Arc Sec: SRTM15+ V2.5.5</name>
+        <identifier><type>PropertyValue</type><propertyID>opentopoID</propertyID><value>OTSRTM.122019.4326.1</value></identifier>
+        <alternateName>SRTM15Plus</alternateName>
+        <url>https://doi.org/10.5069/G92R3PT9</url>
+        <fileFormat>Raster</fileFormat>
+        <dateCreated>2020-12-10</dateCreated>
+        <temporalCoverage>2000-02-11 / 2023-03-20</temporalCoverage>
+        <spatialCoverage>
+          <type>Place</type>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Horizontal Coordinates</name>
+            <value>WGS84</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Vertical Coordinates</name>
+            <value>WGS84 Ellipsoid/EGM1996 Geoid</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Vertical)</name>
+            <value>5773</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Horizontal)</name>
+            <value>4326</value>
+          </additionalProperty>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Area</name>
+            <value>509753760 km2</value>
+          </variableMeasured>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Unit</name>
+            <value>meter</value>
+          </variableMeasured>
+        </spatialCoverage>
+        </Dataset>
+        <Dataset>
+        <name>ALOS World 3D - 30m Ellipsoidal</name>
+        <identifier><type>PropertyValue</type><propertyID>opentopoID</propertyID><value>OTALOS.082017.4326.1</value></identifier>
+        <alternateName>AW3D30_E</alternateName>
+        <url>https://doi.org/10.5069/G94M92HB</url>
+        <fileFormat>Raster</fileFormat>
+        <dateCreated>2016-12-07</dateCreated>
+        <temporalCoverage>2006-01-01 / 2011-01-01</temporalCoverage>
+        <spatialCoverage>
+          <type>Place</type>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Horizontal Coordinates</name>
+            <value>WGS84</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Vertical Coordinates</name>
+            <value>WGS84 Ellipsoid</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Vertical)</name>
+            <value>4979</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Horizontal)</name>
+            <value>4326</value>
+          </additionalProperty>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Area</name>
+            <value>Unavailable</value>
+          </variableMeasured>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Unit</name>
+            <value>meter</value>
+          </variableMeasured>
+        </spatialCoverage>
+        </Dataset>
+        <Dataset>
+        <name>Shuttle Radar Topography Mission (SRTM GL1) Global 30m Ellipsoidal</name>
+        <identifier><type>PropertyValue</type><propertyID>opentopoID</propertyID><value>OTSRTM.082016.4326.1</value></identifier>
+        <alternateName>SRTM_GL1_Ellip</alternateName>
+        <url>https://doi.org/10.5069/G9445JDF</url>
+        <fileFormat>Raster</fileFormat>
+        <dateCreated>2013-04-01</dateCreated>
+        <temporalCoverage>2000-02-11 / 2000-02-22</temporalCoverage>
+        <spatialCoverage>
+          <type>Place</type>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Horizontal Coordinates</name>
+            <value>WGS84</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Vertical Coordinates</name>
+            <value>WGS84 Ellipsoid</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Vertical)</name>
+            <value>4979</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Horizontal)</name>
+            <value>4326</value>
+          </additionalProperty>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Area</name>
+            <value>119560000 km2</value>
+          </variableMeasured>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Unit</name>
+            <value>degree</value>
+          </variableMeasured>
+        </spatialCoverage>
+        </Dataset>
+        <Dataset>
+        <name>ALOS World 3D - 30m</name>
+        <identifier><type>PropertyValue</type><propertyID>opentopoID</propertyID><value>OTALOS.112016.4326.2</value></identifier>
+        <alternateName>AW3D30</alternateName>
+        <url>https://doi.org/10.5069/G94M92HB</url>
+        <fileFormat>Raster</fileFormat>
+        <dateCreated>2016-12-07</dateCreated>
+        <temporalCoverage>2006-01-01 / 2011-01-01</temporalCoverage>
+        <spatialCoverage>
+          <type>Place</type>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Horizontal Coordinates</name>
+            <value>WGS84</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Vertical Coordinates</name>
+            <value>WGS84 Ellipsoid/EGM1996 Geoid</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Vertical)</name>
+            <value>5773</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Horizontal)</name>
+            <value>4326</value>
+          </additionalProperty>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Area</name>
+            <value>Unavailable</value>
+          </variableMeasured>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Unit</name>
+            <value>meter</value>
+          </variableMeasured>
+        </spatialCoverage>
+        </Dataset>
+        <Dataset>
+        <name>Shuttle Radar Topography Mission (SRTM GL1) Global 30m</name>
+        <identifier><type>PropertyValue</type><propertyID>opentopoID</propertyID><value>OTSRTM.082015.4326.1</value></identifier>
+        <alternateName>SRTM_GL1</alternateName>
+        <url>https://doi.org/10.5069/G9445JDF</url>
+        <fileFormat>Raster</fileFormat>
+        <dateCreated>2013-04-01</dateCreated>
+        <temporalCoverage>2000-02-11 / 2000-02-22</temporalCoverage>
+        <spatialCoverage>
+          <type>Place</type>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Horizontal Coordinates</name>
+            <value>WGS84</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Vertical Coordinates</name>
+            <value>WGS84 Ellipsoid/EGM1996 Geoid</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Vertical)</name>
+            <value>5773</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Horizontal)</name>
+            <value>4326</value>
+          </additionalProperty>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Area</name>
+            <value>119560000 km2</value>
+          </variableMeasured>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Unit</name>
+            <value>degree</value>
+          </variableMeasured>
+        </spatialCoverage>
+        </Dataset>
+        <Dataset>
+        <name>Shuttle Radar Topography Mission (SRTM GL3) Global 90m</name>
+        <identifier><type>PropertyValue</type><propertyID>opentopoID</propertyID><value>OTSRTM.042013.4326.1</value></identifier>
+        <alternateName>SRTM_GL3</alternateName>
+        <url>https://doi.org/10.5069/G9445JDF</url>
+        <fileFormat>Raster</fileFormat>
+        <dateCreated>2013-04-01</dateCreated>
+        <temporalCoverage>2000-02-11 / 2000-02-22</temporalCoverage>
+        <spatialCoverage>
+          <type>Place</type>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Horizontal Coordinates</name>
+            <value>WGS84</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>Vertical Coordinates</name>
+            <value>WGS84 Ellipsoid/EGM1996 Geoid</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Vertical)</name>
+            <value>5773</value>
+          </additionalProperty>
+          <additionalProperty>
+            <type>PropertyValue</type>
+            <additionalType>CoordinatesSystem</additionalType>
+            <name>EPSG (Horizontal)</name>
+            <value>4326</value>
+          </additionalProperty>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Area</name>
+            <value>119560000 km2</value>
+          </variableMeasured>
+          <variableMeasured>
+            <type>PropertyValue</type>
+            <name>Unit</name>
+            <value>degree</value>
+          </variableMeasured>
+        </spatialCoverage>
+        </Dataset>
+        </Datasets>
+  recorded_at: Sat, 29 Aug 2026 15:44:13 GMT
+recorded_with: VCR 6.4.0
