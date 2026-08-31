@@ -31,22 +31,22 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  # Uncomment to register a new dependency of your gem
-  spec.add_dependency "faraday", ">= 1.10"
-  spec.add_dependency "faraday_middleware", ">= 1.2"
-  spec.add_dependency "multi_xml", ">= 0.9"
-  spec.add_dependency "ox", ">= 2.14"
   spec.add_dependency "dry-validation", ">= 1.11"
-  spec.add_dependency "zeitwerk"
+  spec.add_dependency "faraday_middleware", ">= 1.2"
+  spec.add_dependency "faraday", ">= 1.10"
+  spec.add_dependency "multi_xml", ">= 0.9"
   spec.add_dependency "oj", ">= 3.17"
+  spec.add_dependency "ox", ">= 2.14"
+  spec.add_dependency "zeitwerk"
 
-  spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "standard", "~> 1.3"
-  spec.add_development_dependency "fasterer", "~> 0.11"
-  spec.add_development_dependency "vcr", "~> 6.4"
+  spec.add_development_dependency "bundle-audit"
   spec.add_development_dependency "factory_bot", "~> 6.6"
+  spec.add_development_dependency "fasterer", "~> 0.11"
+  spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "simplecov", "~> 1.1.1"
+  spec.add_development_dependency "standard", "~> 1.3"
   spec.add_development_dependency "timecop", "~> 0.9"
+  spec.add_development_dependency "vcr", "~> 6.4"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html

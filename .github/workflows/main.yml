@@ -61,6 +61,26 @@ jobs:
           bundler-cache: true
       - name: Fasterer
         run: bundle exec fasterer
+
+  bundle-audit:
+    name: Ruby ${{ matrix.ruby }} bundle-audit
+    runs-on: ubuntu-latest
+
+    needs: [define-matrix]
+    strategy:
+      matrix:
+        ruby: ${{ fromJSON(needs.define-matrix.outputs.ruby_versions) }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - name: bundle-audit
+        run: bundle exec bundle-audit check --update
 # end region lint
 
 # region test
