@@ -18,13 +18,13 @@ Gem::Specification.new do |spec|
   spec.metadata["source_code_uri"] = "https://github.com/andrew-kh8/open_topo"
   spec.metadata["changelog_uri"] = "https://github.com/andrew-kh8/open_topo/blob/master/CHANGELOG.md"
 
-  # Specify which files should be added to the gem when it is released.
-  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
   gemspec = File.basename(__FILE__)
   spec.files = IO.popen(%w[git ls-files -z], chdir: __dir__, err: IO::NULL) do |ls|
     ls.readlines("\x0", chomp: true).reject do |f|
       (f == gemspec) ||
-        f.start_with?(*%w[bin/ Gemfile .gitignore .rspec spec/ .github/ .standard.yml])
+        f.start_with?(
+          "bin/", "Gemfile", ".gitignore", ".rspec", "spec/", ".github/", "docs/", ".standard.yml", ".fasterer.yml", ".simplecov", "README.md"
+        )
     end
   end
   spec.bindir = "exe"
@@ -47,7 +47,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "standard", "~> 1.3"
   spec.add_development_dependency "timecop", "~> 0.9"
   spec.add_development_dependency "vcr", "~> 6.4"
-
-  # For more information and examples about making a new gem, check out our
-  # guide at: https://bundler.io/guides/creating_gem.html
 end
