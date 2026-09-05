@@ -1,0 +1,17 @@
+name: WIP Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, labeled, unlabeled]
+
+jobs:
+  wip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check WIP label
+        if: contains(github.event.pull_request.labels.*.name, 'wip')
+        run: |
+          echo "PR has WIP label"
+          exit 1
+
+      - run: echo "No WIP label"
