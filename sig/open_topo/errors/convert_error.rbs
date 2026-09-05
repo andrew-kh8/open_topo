@@ -1,0 +1,6 @@
+module OpenTopo
+  module Errors
+    class ConvertError < BaseError
+    end
+  end
+end

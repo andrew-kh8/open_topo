@@ -1,0 +1,27 @@
+module OpenTopo
+  class Point
+    @long: untyped
+
+    @lat: untyped
+
+    @heigh: untyped
+
+    @unit: untyped
+
+    attr_reader long: untyped
+
+    alias longitude long
+
+    attr_reader lat: untyped
+
+    alias latitude lat
+
+    attr_reader heigh: untyped
+
+    alias elevation heigh
+
+    attr_reader unit: untyped
+
+    def initialize: (long: untyped, lat: untyped, ?heigh: untyped?, ?unit: ::String) -> void
+  end
+end

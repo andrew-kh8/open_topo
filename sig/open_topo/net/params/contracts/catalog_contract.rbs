@@ -1,0 +1,11 @@
+module OpenTopo
+  module Net
+    module Params
+      module Contracts
+        class CatalogContract < ::Dry::Validation::Contract
+          COORDS: { minx: :west, miny: :south, maxx: :east, maxy: :north }
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,29 @@
+module OpenTopo
+  class Catalog
+    @full_name: untyped
+
+    @name: untyped
+
+    @url: untyped
+
+    @date_created: untyped
+
+    @temporal_coverage: untyped
+
+    @unit: untyped
+
+    attr_reader full_name: untyped
+
+    attr_reader name: untyped
+
+    attr_reader url: untyped
+
+    attr_reader date_created: untyped
+
+    attr_reader temporal_coverage: untyped
+
+    attr_reader unit: untyped
+
+    def initialize: (full_name: untyped, name: untyped, url: untyped, date_created: untyped, temporal_coverage: untyped, ?unit: ::String) -> void
+  end
+end

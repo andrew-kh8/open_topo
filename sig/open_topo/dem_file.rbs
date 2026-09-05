@@ -1,0 +1,21 @@
+module OpenTopo
+  class DemFile
+    @original_file: untyped
+
+    @dem_type: untyped
+
+    @output_format: untyped
+
+    attr_reader original_file: untyped
+
+    alias file original_file
+
+    attr_reader dem_type: untyped
+
+    attr_reader output_format: untyped
+
+    def initialize: (original_file: untyped, dem_type: untyped, output_format: untyped) -> void
+
+    def convert_to: (untyped format, ?file_path: untyped?) -> untyped
+  end
+end

@@ -1,0 +1,15 @@
+module OpenTopo
+  module Services
+    class DemConverter
+      FILENAME_EXT_SPLITTER: ".*"
+
+      def self.call: (untyped file, untyped file_format, ?file_path: untyped?) -> untyped
+
+      private
+
+      def self.build_new_filename: (untyped file, untyped file_path, untyped file_format) -> untyped
+
+      def self.gdal_translate_command: (untyped original_filename, untyped new_filename) -> ::String
+    end
+  end
+end

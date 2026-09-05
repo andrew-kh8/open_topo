@@ -1,0 +1,50 @@
+module OpenTopo
+  module Net
+    class Response
+
+
+  attr_reader date: String
+  attr_reader content_disposition: String
+  attr_reader content_length: String
+  attr_reader content_type: String
+  
+class Headers
+  def initialize: (String date, String content_disposition, String content_length, String content_type) -> void
+                | (date: String, content_disposition: String, content_length: String, content_type: String) -> void  
+end
+          def filename: () -> String?
+          def filename_header: () -> String
+
+      @body: untyped
+
+      @headers: untyped
+
+      @status: untyped
+
+      NOT_FOUND_MESSAGE: "Not found"
+
+      NO_DATA_MESSAGE: "No data"
+
+      attr_reader body: untyped
+
+      attr_reader headers: untyped
+
+      attr_reader status: untyped
+
+
+      def initialize: (untyped response) -> void
+
+      def success?: () -> untyped
+
+      def failure?: () -> untyped
+
+      def data?: () -> untyped
+
+      private
+
+      def parse_headers: (untyped headers) -> untyped
+
+      def set_body_message: (untyped response) -> untyped
+    end
+  end
+end

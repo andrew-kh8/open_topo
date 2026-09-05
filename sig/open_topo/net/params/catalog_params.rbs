@@ -1,0 +1,35 @@
+module OpenTopo
+  module Net
+    module Params
+      class CatalogParams < BaseParams
+        @west: untyped
+
+        @south: untyped
+
+        @east: untyped
+
+        @north: untyped
+
+        @polygon: untyped
+
+        attr_reader west: untyped
+
+        attr_reader south: untyped
+
+        attr_reader east: untyped
+
+        attr_reader north: untyped
+
+        attr_reader polygon: untyped
+
+        def initialize: (?west: untyped?, ?south: untyped?, ?east: untyped?, ?north: untyped?, ?polygon: untyped?) -> void
+
+        def to_params: () -> untyped
+
+        private
+
+        def default_params: () -> { productFormat: "Raster", outputFormat: "xml", detail: false, include_federated: false }
+      end
+    end
+  end
+end

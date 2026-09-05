@@ -1,0 +1,7 @@
+module Dry
+  module Validation
+    class Contract
+    def key: () -> void | (Symbol) -> void
+    end
+  end
+end

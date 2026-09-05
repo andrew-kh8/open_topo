@@ -1,0 +1,33 @@
+module OpenTopo
+  module Net
+    module Params
+      class BaseParams
+        self.@contract: untyped
+
+        @validation_result: untyped
+
+        extend Forwardable
+
+        def initialize: () -> void
+
+        def to_params: () -> untyped
+
+        def valid?: () -> untyped
+
+        def validate!: () -> true
+
+        def error_messages: () -> (untyped | ::Array[untyped])
+
+        private
+
+        attr_reader validation_result: untyped
+
+        def validate: () -> untyped
+
+        attr_reader self.contract: untyped
+
+        def self.validate_with: (untyped contract) -> untyped
+      end
+    end
+  end
+end

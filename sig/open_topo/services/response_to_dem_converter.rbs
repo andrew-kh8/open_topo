@@ -1,0 +1,15 @@
+module OpenTopo
+  module Services
+    class ResponseToDemConverter
+      DATE_TIME_FORMAT: "%F-%H-%M-%S"
+
+      def self.call: (untyped response, dem_type: untyped, output_format: untyped) -> untyped
+
+      private
+
+      def self.file_from_response: (untyped response) -> (nil | untyped)
+
+      def self.filename_from_response: (untyped response) -> untyped
+    end
+  end
+end

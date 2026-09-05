@@ -1,0 +1,39 @@
+module OpenTopo
+  module Net
+    module Params
+      class GlobaldemParams < BaseParams
+        @south: untyped
+
+        @north: untyped
+
+        @west: untyped
+
+        @east: untyped
+
+        @demtype: untyped
+
+        @output_format: untyped
+
+        OUTPUT_FORMATS: { tif: "GTiff", hfa: "HFA", asc: "AAIGrid" }
+
+        DEM_TYPES: { anadem: "ANADEM", aw3_d30_e: "AW3D30_E", aw3_d30: "AW3D30", ca_mrdem_dsm: "CA_MRDEM_DSM", ca_mrdem_dtm: "CA_MRDEM_DTM", cop30: "COP30", cop90: "COP90", eu_dtm: "EU_DTM", gebco_ice_topo: "GEBCOIceTopo", gebco_sub_ice_topo: "GEBCOSubIceTopo", gedi_l3: "GEDI_L3", gedtm30: "GEDTM30", nasadem: "NASADEM", srtm15_plus: "SRTM15Plus", srtmgl1_e: "SRTMGL1_E", srtmgl1: "SRTMGL1", srtmgl3: "SRTMGL3" }
+
+        attr_reader south: untyped
+
+        attr_reader north: untyped
+
+        attr_reader west: untyped
+
+        attr_reader east: untyped
+
+        attr_reader demtype: untyped
+
+        attr_reader output_format: untyped
+
+        def initialize: (south: untyped, north: untyped, west: untyped, east: untyped, demtype: untyped, output_format: untyped) -> void
+
+        def to_params: () -> { south: untyped, north: untyped, west: untyped, east: untyped, demtype: untyped, outputFormat: untyped }
+      end
+    end
+  end
+end

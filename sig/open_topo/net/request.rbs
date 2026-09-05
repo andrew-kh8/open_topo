@@ -1,0 +1,25 @@
+module OpenTopo
+  module Net
+    class Request
+      @connection: untyped
+
+      GLOBALDEM_ENDPOINT: "/API/globaldem"
+
+      USGSDEM_ENDPOINT: "/API/usgsdem"
+
+      ELEVATION_ENDPOINT: "/API/v1/elevation"
+
+      CATALOG_ENDPOINT: "/API/otCatalog"
+
+      def initialize: (?untyped? api_key) -> void
+
+      def globaldem: (untyped params) -> untyped
+
+      def usgsdem: (untyped params) -> untyped
+
+      def elevation: (untyped params) -> untyped
+
+      def catalog: (untyped params) -> untyped
+    end
+  end
+end

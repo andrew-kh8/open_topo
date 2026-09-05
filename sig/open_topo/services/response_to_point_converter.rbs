@@ -1,0 +1,7 @@
+module OpenTopo
+  module Services
+    class ResponseToPointConverter
+      def self.call: (untyped response) -> untyped
+    end
+  end
+end

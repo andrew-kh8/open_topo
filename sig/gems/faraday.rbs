@@ -1,0 +1,10 @@
+class Faraday
+    class Connection
+        def request: (Symbol) -> void
+        def response: (Symbol, ?Hash[Symbol, untyped]) -> void
+        def adapter: (Class) -> void
+    end
+
+    def initialize: (Hash[Symbol, untyped], request: Hash[Symbol, untyped]) ?{ (Connection) -> void } -> Connection
+    def self.default_adapter: () -> Class
+end

@@ -1,0 +1,10 @@
+module OpenTopo
+  module Net
+    module Params
+      module Contracts
+        class GlobaldemContract < ::Dry::Validation::Contract
+        end
+      end
+    end
+  end
+end

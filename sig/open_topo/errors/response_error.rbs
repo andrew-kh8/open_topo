@@ -1,0 +1,7 @@
+module OpenTopo
+  module Errors
+    class ResponseError < BaseError
+      def initialize: (?::String message) -> void
+    end
+  end
+end

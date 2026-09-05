@@ -1,0 +1,9 @@
+module Zeitwerk
+    class GemLoader
+        def setup: () -> void
+    end
+
+    class Loader
+        def self.for_gem: () -> GemLoader
+    end
+end
