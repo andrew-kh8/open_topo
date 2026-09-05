@@ -6,6 +6,7 @@ target :lib do
   ignore "lib/open_topo/net/params/contracts"
   library "date"
   library "open3"
+  library "pathname"
   #   ignore_signature "sig/test"
   #
   #

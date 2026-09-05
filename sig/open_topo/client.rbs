@@ -1,21 +1,21 @@
 module OpenTopo
   class Client
-    @request: untyped
+    type coord_value = (::String | ::Integer | ::Float)
 
     API_KEY_NAME: "OPEN_TOPOGRAPHY_API_KEY"
 
     def initialize: (?untyped? api_key) -> void
 
-    def globaldem: (south: untyped, north: untyped, west: untyped, east: untyped, ?demtype: ::Symbol, ?output_format: ::Symbol) -> untyped
+    def globaldem: (south: coord_value, north: coord_value, west: coord_value, east: coord_value, ?demtype: ::Symbol, ?output_format: ::Symbol) -> untyped
 
-    def usgsdem: (south: untyped, north: untyped, west: untyped, east: untyped, ?dataset_name: ::Symbol, ?output_format: ::Symbol) -> untyped
+    def usgsdem: (south: coord_value, north: coord_value, west: coord_value, east: coord_value, ?dataset_name: ::Symbol, ?output_format: ::Symbol) -> untyped
 
-    def elevation: (long: untyped, lat: untyped, ?dataset: ::Symbol) -> untyped
+    def elevation: (long: coord_value, lat: coord_value, ?dataset: ::Symbol) -> untyped
 
-    def catalog: (?west: untyped?, ?south: untyped?, ?east: untyped?, ?north: untyped?, ?polygon: untyped?) -> untyped
+    def catalog: (?west: coord_value?, ?south: coord_value?, ?east: coord_value?, ?north: coord_value?, ?polygon: Array[Array[coord_value]]?) -> untyped
 
     private
 
-    attr_reader request: untyped
+    attr_reader request: Net::Request
   end
 end
