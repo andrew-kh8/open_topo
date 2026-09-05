@@ -106,5 +106,5 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
       - name: RSpec run
-        run: bundle exec rspec
+        run: COVERAGE=true bundle exec rspec
 # end region test

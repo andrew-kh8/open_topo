@@ -1,3 +1,5 @@
+require "tempfile"
+
 RSpec.describe OpenTopo::Services::DemConverter do
   describe ".call" do
     subject { described_class.call(file, file_format, file_path:) }
