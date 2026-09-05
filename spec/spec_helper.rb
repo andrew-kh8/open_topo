@@ -4,7 +4,11 @@ require "open_topo"
 require "support/vcr_setup"
 
 require "factory_bot"
-require "simplecov"
+
+if ENV["COVERAGE"] == "true"
+  require "simplecov"
+  SimpleCov.start
+end
 
 Dir["./spec/support/shared/**/*.rb"].sort.each { |f| require f }
 
