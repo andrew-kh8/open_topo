@@ -1,0 +1,6 @@
+module OpenTopo
+  module Errors
+    class ParamsError < BaseError
+    end
+  end
+end

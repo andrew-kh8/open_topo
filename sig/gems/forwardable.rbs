@@ -1,0 +1,3 @@
+module Forwardable
+    def def_delegator: (Symbol, Symbol, Symbol) -> untyped
+end

@@ -1,0 +1,39 @@
+module OpenTopo
+  module Net
+    module Params
+      class UsgsdemParams < BaseParams
+        @south: untyped
+
+        @north: untyped
+
+        @west: untyped
+
+        @east: untyped
+
+        @demtype: untyped
+
+        @output_format: untyped
+
+        OUTPUT_FORMATS: { tif: "GTiff", hfa: "HFA", asc: "AAIGrid" }
+
+        DEM_TYPES: { usgs1m: "USGS1m", usgs10m: "USGS10m", usgs30m: "USGS30m" }
+
+        attr_reader south: untyped
+
+        attr_reader north: untyped
+
+        attr_reader west: untyped
+
+        attr_reader east: untyped
+
+        attr_reader demtype: untyped
+
+        attr_reader output_format: untyped
+
+        def initialize: (south: untyped, north: untyped, west: untyped, east: untyped, dataset_name: untyped, output_format: untyped) -> void
+
+        def to_params: () -> { south: untyped, north: untyped, west: untyped, east: untyped, datasetName: untyped, outputFormat: untyped }
+      end
+    end
+  end
+end

@@ -1,0 +1,19 @@
+module OpenTopo
+  class Point
+    attr_reader long: (::Integer | ::Float)
+
+    alias longitude long
+
+    attr_reader lat: (::Integer | ::Float)
+
+    alias latitude lat
+
+    attr_reader heigh: (::Integer | ::Float)?
+
+    alias elevation heigh
+
+    attr_reader unit: ::String
+
+    def initialize: (long: (::Integer | ::Float), lat: (::Integer | ::Float), ?heigh: (::Integer | ::Float)?, ?unit: ::String) -> void
+  end
+end

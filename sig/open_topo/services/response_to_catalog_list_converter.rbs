@@ -1,0 +1,7 @@
+module OpenTopo
+  module Services
+    class ResponseToCatalogListConverter
+      def self.call: (untyped data) -> (::Array[untyped] | untyped)
+    end
+  end
+end

@@ -1,0 +1,17 @@
+module OpenTopo
+  class Catalog
+    attr_reader full_name: String?
+
+    attr_reader name: String?
+
+    attr_reader url: String?
+
+    attr_reader date_created: String?
+
+    attr_reader temporal_coverage: {from: ::String?, to: ::String?}?
+
+    attr_reader unit: String?
+
+    def initialize: (full_name: String?, name: String?, url: String?, date_created: String?, temporal_coverage: {from: ::String?, to: ::String?}?, ?unit: ::String?) -> void
+  end
+end

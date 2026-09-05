@@ -1,0 +1,21 @@
+module OpenTopo
+  class Client
+    type coord_value = (::String | ::Integer | ::Float)
+
+    API_KEY_NAME: "OPEN_TOPOGRAPHY_API_KEY"
+
+    def initialize: (?untyped? api_key) -> void
+
+    def globaldem: (south: coord_value, north: coord_value, west: coord_value, east: coord_value, ?demtype: ::Symbol, ?output_format: ::Symbol) -> untyped
+
+    def usgsdem: (south: coord_value, north: coord_value, west: coord_value, east: coord_value, ?dataset_name: ::Symbol, ?output_format: ::Symbol) -> untyped
+
+    def elevation: (long: coord_value, lat: coord_value, ?dataset: ::Symbol) -> untyped
+
+    def catalog: (?west: coord_value?, ?south: coord_value?, ?east: coord_value?, ?north: coord_value?, ?polygon: Array[Array[coord_value]]?) -> untyped
+
+    private
+
+    attr_reader request: Net::Request
+  end
+end

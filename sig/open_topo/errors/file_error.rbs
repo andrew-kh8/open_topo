@@ -1,0 +1,13 @@
+module OpenTopo
+  module Errors
+    class FileError < BaseError
+      @file_path: untyped
+
+      attr_reader file_path: untyped
+
+      def initialize: (?::String message, ?file_path: untyped?) -> void
+
+      def file: () -> untyped
+    end
+  end
+end

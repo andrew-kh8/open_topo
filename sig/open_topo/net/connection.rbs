@@ -1,0 +1,29 @@
+module OpenTopo
+  module Net
+    class Connection
+      @api_key: untyped
+
+      def initialize: (?untyped? api_key) -> void
+
+      def build: () -> untyped
+
+      private
+
+      BASE_URL: "https://portal.opentopography.org"
+
+      XML_CONTENT_TYPE: "application/xml"
+
+      ACCEPT_CONTENT_TYPE: ::String
+
+      attr_reader api_key: untyped
+
+      def create_connection: () -> untyped
+
+      def options: () -> { url: untyped, headers: untyped, params: { API_Key: untyped } }
+
+      def headers: () -> { "Accept" => untyped, "User-Agent" => ::String }
+
+      def request_options: () -> ::Hash[untyped, untyped]
+    end
+  end
+end

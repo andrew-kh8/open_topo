@@ -1,0 +1,15 @@
+module OpenTopo
+  class DemFile
+    attr_reader original_file: File
+
+    alias file original_file
+
+    attr_reader dem_type: (::String | ::Symbol)
+
+    attr_reader output_format: (::String | ::Symbol)
+
+    def initialize: (original_file: File, dem_type: (::String | ::Symbol), output_format: (::String | ::Symbol)) -> void
+
+    def convert_to: ((::String | ::Symbol) format, ?file_path: (::String | ::Pathname)?) -> File
+  end
+end
