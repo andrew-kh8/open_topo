@@ -6,7 +6,7 @@ on:
 
 jobs:
   wip:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Check WIP label
         if: contains(github.event.pull_request.labels.*.name, 'wip')

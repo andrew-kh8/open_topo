@@ -8,9 +8,11 @@ on:
 permissions:
   contents: read
 
+# Pin the runner image: ubuntu-latest has moved to Ubuntu 26, which only
+# ships prebuilt binaries for the latest patch of each Ruby series (not 3.3.6).
 jobs:
   define-matrix:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     outputs:
       ruby_versions: ${{ steps.ruby_versions.outputs.ruby_versions }}
@@ -19,12 +21,12 @@ jobs:
       - name: Define Ruby versions
         id: ruby_versions
         run: |
-          echo 'ruby_versions=["3.3.6"]' >> "$GITHUB_OUTPUT"
+          echo 'ruby_versions=["3.3", "3.3.6"]' >> "$GITHUB_OUTPUT"
 
 # region lint
   standardrb:
     name: Ruby ${{ matrix.ruby }} standardrb
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     needs: [define-matrix]
     strategy:
@@ -44,7 +46,7 @@ jobs:
 
   fasterer:
     name: Ruby ${{ matrix.ruby }} fasterer
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     needs: [define-matrix]
     strategy:
@@ -64,7 +66,7 @@ jobs:
 
   bundle-audit:
     name: Ruby ${{ matrix.ruby }} bundle-audit
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     needs: [define-matrix]
     strategy:
@@ -86,7 +88,7 @@ jobs:
 # region test
   rspec:
     name: Ruby ${{ matrix.ruby }} RSpec
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [standardrb, define-matrix]
 
     strategy:

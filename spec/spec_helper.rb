@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require "open_topo"
-require "support/vcr_setup"
-
-require "factory_bot"
-
 if ENV["COVERAGE"] == "true"
   require "simplecov"
   SimpleCov.start
 end
+
+require "open_topo"
+require "support/vcr_setup"
+
+require "factory_bot"
 
 Dir["./spec/support/shared/**/*.rb"].sort.each { |f| require f }
 
