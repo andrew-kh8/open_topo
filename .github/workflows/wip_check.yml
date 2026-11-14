@@ -1,0 +1,22 @@
+name: WIP Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, labeled, unlabeled]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  wip:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Check WIP label
+        if: contains(github.event.pull_request.labels.*.name, 'wip')
+        run: |
+          echo "PR has WIP label"
+          exit 1
+
+      - run: echo "No WIP label"

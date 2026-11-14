@@ -1,3 +1,5 @@
+require "tempfile"
+
 RSpec.describe OpenTopo::Services::DemConverter do
   describe ".call" do
     subject { described_class.call(file, file_format, file_path:) }
@@ -13,7 +15,7 @@ RSpec.describe OpenTopo::Services::DemConverter do
     end
 
     it "fills correct data" do
-      expect(FileUtils.compare_file(File.open("spec/fixtures/files/global_csv.csv"), subject)).to eq true
+      expect(FileUtils.compare_file("spec/fixtures/files/global_csv.csv", subject.path)).to eq true
     end
 
     context "when file is not a File" do
@@ -26,6 +28,8 @@ RSpec.describe OpenTopo::Services::DemConverter do
 
     context "when file is not supported by gdal" do
       let(:file) { Tempfile.new("fake_file") }
+
+      after { file.close! }
 
       it "raises an exception" do
         expect { subject }.to raise_error(OpenTopo::Errors::ConvertError, "ERROR 4: `#{file.path}' not recognized as a supported file format.")
