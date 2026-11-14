@@ -9,7 +9,6 @@ end
 
 require "open_topo"
 require "support/vcr_setup"
-
 require "factory_bot"
 
 Dir["./spec/support/shared/**/*.rb"].sort.each { |f| require f }
