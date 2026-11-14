@@ -52,6 +52,20 @@ client.catalog(west:, south: , east:, north:) # => [OpenTopo::Catalog]
 client.catalog(polygon:) # => [OpenTopo::Catalog]
 ```
 
+DEM files are saved into `./open_topo_files` by default. Use the module configuration to choose another directory:
+
+```ruby
+OpenTopo.configure do |config|
+  config.file_dir = "./my_dem_files"
+end
+
+client = OpenTopo::Client.new(api_key)
+```
+
+The current value is available via `OpenTopo.configuration.file_dir`.
+
+The directory is created automatically when the first DEM file is saved. Converted CSV files are written next to the original TIF, so they use the same directory by default.
+
 ## Development and contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/andrew-kh8/open_topo.

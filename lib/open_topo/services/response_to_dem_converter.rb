@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "fileutils"
+
 module OpenTopo
   module Services
     class ResponseToDemConverter
@@ -15,8 +17,11 @@ module OpenTopo
         def file_from_response(response)
           return nil if !response.data?
 
+          file_dir = OpenTopo.configuration.file_dir
+          FileUtils.mkdir_p(file_dir)
+
           filename = filename_from_response(response)
-          file = File.new([filename, ".tif"].join, "w")
+          file = File.new(File.join(file_dir, "#{filename}.tif"), "w")
 
           file.binmode
           file.write(response.body)

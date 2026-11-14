@@ -39,7 +39,7 @@ RSpec.describe OpenTopo::Services::ResponseToDemConverter do
       end
 
       it "generates a default filename" do
-        expect(dem_file.file.path).to eq "dem_2026-08-15-21-56-00.tif"
+        expect(dem_file.file.path).to eq "./open_topo_files/dem_2026-08-15-21-56-00.tif"
       end
     end
 
