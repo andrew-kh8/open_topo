@@ -2,7 +2,7 @@
 
 require "vcr"
 
-# Locally: record missing cassettes (VCR_RECORD=all re-records existing ones).
+# Locally: record missing cassettes (existing cassettes are not overwritten).
 # CI runs with COVERAGE=true and must replay existing cassettes only.
 record_mode =
   if ENV["COVERAGE"] == "true"
