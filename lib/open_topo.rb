@@ -5,8 +5,6 @@ loader = Zeitwerk::Loader.for_gem
 loader.setup
 
 module OpenTopo
-  DEFAULT_FILE_DIR = "./open_topo_files"
-
   class << self
     def configure
       yield configuration
@@ -14,6 +12,10 @@ module OpenTopo
 
     def configuration
       @configuration ||= Configuration.new
+    end
+
+    def reset_configuration!
+      @configuration = Configuration.new
     end
   end
 end

@@ -7,7 +7,7 @@ RSpec.shared_examples "Params validation" do |validator_class|
     context "when it's valid" do
       let(:validation_result) { instance_double(Dry::Validation::Result, success?: true) }
 
-      it "calls elevation contract" do
+      it "calls the contract" do
         expect(validator_class).to receive(:new).and_return(validator)
         expect(validator).to receive(:call).with(instance.to_params).and_return(validation_result)
 
@@ -18,7 +18,7 @@ RSpec.shared_examples "Params validation" do |validator_class|
     context "when not valid" do
       let(:validation_result) { instance_double(Dry::Validation::Result, success?: false, errors: double(messages: [double(text: "error msg")])) }
 
-      it "calls elevation contract" do
+      it "calls the contract" do
         expect(validator_class).to receive(:new).and_return(validator)
         expect(validator).to receive(:call).with(instance.to_params).and_return(validation_result)
 
@@ -31,7 +31,7 @@ RSpec.shared_examples "Params validation" do |validator_class|
     context "when it's valid" do
       let(:validation_result) { instance_double(Dry::Validation::Result, success?: true) }
 
-      it "calls elevation contract" do
+      it "calls the contract" do
         expect(validator_class).to receive(:new).and_return(validator)
         expect(validator).to receive(:call).with(instance.to_params).and_return(validation_result)
 
@@ -42,7 +42,7 @@ RSpec.shared_examples "Params validation" do |validator_class|
     context "when it's not valid" do
       let(:validation_result) { instance_double(Dry::Validation::Result, success?: false) }
 
-      it "calls elevation contract" do
+      it "calls the contract" do
         expect(validator_class).to receive(:new).and_return(validator)
         expect(validator).to receive(:call).with(instance.to_params).and_return(validation_result)
 

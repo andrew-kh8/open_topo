@@ -7,17 +7,20 @@ module OpenTopo
     class ResponseToDemConverter
       DATE_TIME_FORMAT = "%F-%H-%M-%S"
 
-      def self.call(response, dem_type:, output_format:)
-        DemFile.new(original_file: file_from_response(response), dem_type:, output_format:)
+      def self.call(response, dem_type:, output_format:, configuration:)
+        DemFile.new(original_file: file_from_response(response, configuration), dem_type:, output_format:)
       end
 
       class << self
         private
 
-        def file_from_response(response)
+        def file_from_response(response, configuration)
           return nil if !response.data?
 
-          file_dir = OpenTopo.configuration.file_dir
+          write_file(response, configuration.file_dir)
+        end
+
+        def write_file(response, file_dir)
           FileUtils.mkdir_p(file_dir)
 
           filename = filename_from_response(response)
@@ -28,6 +31,8 @@ module OpenTopo
           file.close
 
           File.open(file, "r")
+        rescue SystemCallError, IOError, ArgumentError, TypeError => error
+          raise OpenTopo::Errors::FileError.new(error.message, file_path: file_dir)
         end
 
         def filename_from_response(response)

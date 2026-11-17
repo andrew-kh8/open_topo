@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
+require "fileutils"
+require "tempfile"
 require "timecop"
+require "tmpdir"
 
 RSpec.describe OpenTopo::Services::ResponseToDemConverter do
   describe ".call" do
-    subject(:dem_file) { described_class.call(response, dem_type:, output_format:) }
+    subject(:dem_file) { described_class.call(response, dem_type:, output_format:, configuration:) }
 
     let(:response) do
       instance_double(
@@ -18,8 +21,14 @@ RSpec.describe OpenTopo::Services::ResponseToDemConverter do
     let(:output_format) { :tif }
     let(:dem_type) { :srtmgl3 }
     let(:data_present) { true }
+    let(:configuration) { OpenTopo::Configuration.new }
 
-    after { File.delete(dem_file.file) if dem_file.file && File.exist?(dem_file.file) }
+    after do
+      file = dem_file.file
+      FileUtils.rm_f(file.path) if file
+    rescue OpenTopo::Errors::FileError
+      nil
+    end
 
     context "when response is valid" do
       it "returns a DemFile object with the correct attributes" do
@@ -39,7 +48,35 @@ RSpec.describe OpenTopo::Services::ResponseToDemConverter do
       end
 
       it "generates a default filename" do
-        expect(dem_file.file.path).to eq "./open_topo_files/dem_2026-08-15-21-56-00.tif"
+        expect(dem_file.file.path).to eq File.join(File.expand_path(OpenTopo::Configuration::DEFAULT_FILE_DIR), "dem_2026-08-15-21-56-00.tif")
+      end
+    end
+
+    context "when a custom file directory is configured" do
+      let(:configuration) { OpenTopo.configuration }
+      let(:file_dir) { Dir.mktmpdir("open_topo-spec") }
+      let(:filename) { "custom_filename" }
+
+      before { OpenTopo.configure { |config| config.file_dir = file_dir } }
+
+      after do
+        OpenTopo.reset_configuration!
+        FileUtils.remove_entry(file_dir) if File.exist?(file_dir)
+      end
+
+      it "saves the file in the configured directory" do
+        expect(dem_file.file.path).to eq File.join(File.expand_path(file_dir), "custom_filename.tif")
+      end
+    end
+
+    context "when the file directory cannot be created" do
+      let(:parent_file) { Tempfile.new("open_topo-file") }
+      let(:configuration) { OpenTopo::Configuration.new(file_dir: File.join(parent_file.path, "nested")) }
+
+      after { parent_file.close! }
+
+      it "raises a FileError" do
+        expect { dem_file }.to raise_error(OpenTopo::Errors::FileError)
       end
     end
 
