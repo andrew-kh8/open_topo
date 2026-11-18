@@ -6,9 +6,12 @@ require "timecop"
 require "tmpdir"
 
 RSpec.describe OpenTopo::Services::ResponseToDemConverter do
-  describe ".call" do
-    subject(:dem_file) { described_class.call(response, dem_type:, output_format:, configuration:) }
+  describe "#call" do
+    subject(:dem_file) { converter.call(response, dem_type:, output_format:) }
 
+    let(:converter) { described_class.new(configuration) }
+    let(:configuration) { OpenTopo::Configuration.new(file_dir:) }
+    let(:file_dir) { Dir.mktmpdir("open_topo-spec") }
     let(:response) do
       instance_double(
         OpenTopo::Net::Response,
@@ -21,13 +24,12 @@ RSpec.describe OpenTopo::Services::ResponseToDemConverter do
     let(:output_format) { :tif }
     let(:dem_type) { :srtmgl3 }
     let(:data_present) { true }
-    let(:configuration) { OpenTopo::Configuration.new }
+    let(:file_path) { File.join(file_dir, "#{filename || default_filename}.tif") }
+    let(:default_filename) { "dem_2026-08-15-21-56-00" }
 
     after do
-      file = dem_file.file
-      FileUtils.rm_f(file.path) if file
-    rescue OpenTopo::Errors::FileError
-      nil
+      FileUtils.rm_f(file_path)
+      FileUtils.remove_entry(file_dir) if File.exist?(file_dir)
     end
 
     context "when response is valid" do
@@ -37,6 +39,10 @@ RSpec.describe OpenTopo::Services::ResponseToDemConverter do
         expect(dem_file.output_format).to eq(output_format)
         expect(dem_file.file).to be_a(File)
         expect(dem_file.file.read).to eq("fake_tif_data")
+      end
+
+      it "writes the file to the configured directory" do
+        expect(dem_file.file.path).to eq(file_path)
       end
     end
 
@@ -48,30 +54,13 @@ RSpec.describe OpenTopo::Services::ResponseToDemConverter do
       end
 
       it "generates a default filename" do
-        expect(dem_file.file.path).to eq File.join(File.expand_path(OpenTopo::Configuration::DEFAULT_FILE_DIR), "dem_2026-08-15-21-56-00.tif")
-      end
-    end
-
-    context "when a custom file directory is configured" do
-      let(:configuration) { OpenTopo.configuration }
-      let(:file_dir) { Dir.mktmpdir("open_topo-spec") }
-      let(:filename) { "custom_filename" }
-
-      before { OpenTopo.configure { |config| config.file_dir = file_dir } }
-
-      after do
-        OpenTopo.reset_configuration!
-        FileUtils.remove_entry(file_dir) if File.exist?(file_dir)
-      end
-
-      it "saves the file in the configured directory" do
-        expect(dem_file.file.path).to eq File.join(File.expand_path(file_dir), "custom_filename.tif")
+        expect(dem_file.file.path).to eq(file_path)
       end
     end
 
     context "when the file directory cannot be created" do
       let(:parent_file) { Tempfile.new("open_topo-file") }
-      let(:configuration) { OpenTopo::Configuration.new(file_dir: File.join(parent_file.path, "nested")) }
+      let(:file_dir) { File.join(parent_file.path, "nested") }
 
       after { parent_file.close! }
 
@@ -80,10 +69,10 @@ RSpec.describe OpenTopo::Services::ResponseToDemConverter do
       end
     end
 
-    context "when response have a empty body" do
+    context "when response have an empty body" do
       let(:data_present) { false }
 
-      it "returns a nil" do
+      it "returns nil" do
         expect(dem_file.file).to be_nil
       end
     end

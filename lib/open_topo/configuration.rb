@@ -8,6 +8,14 @@ module OpenTopo
     DEFAULT_ELEVATION_DATASET = :srtmgl3
     DEFAULT_OUTPUT_FORMAT = :tif
 
+    UPDATABLE_ATTRIBUTES = %i[
+      file_dir
+      global_dataset
+      usgs_dataset
+      elevation_dataset
+      output_format
+    ].freeze
+
     attr_reader :file_dir
     attr_accessor :global_dataset, :usgs_dataset, :elevation_dataset, :output_format
 
@@ -19,10 +27,22 @@ module OpenTopo
       output_format: DEFAULT_OUTPUT_FORMAT
     )
       self.file_dir = file_dir
-      @global_dataset = global_dataset
-      @usgs_dataset = usgs_dataset
-      @elevation_dataset = elevation_dataset
-      @output_format = output_format
+      self.global_dataset = global_dataset
+      self.usgs_dataset = usgs_dataset
+      self.elevation_dataset = elevation_dataset
+      self.output_format = output_format
+    end
+
+    def update(attributes)
+      attributes = attributes.slice(*UPDATABLE_ATTRIBUTES).compact
+
+      self.file_dir = attributes.fetch(:file_dir) { file_dir }
+      self.global_dataset = attributes.fetch(:global_dataset) { global_dataset }
+      self.usgs_dataset = attributes.fetch(:usgs_dataset) { usgs_dataset }
+      self.elevation_dataset = attributes.fetch(:elevation_dataset) { elevation_dataset }
+      self.output_format = attributes.fetch(:output_format) { output_format }
+
+      self
     end
 
     def file_dir=(value)

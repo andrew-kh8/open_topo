@@ -7,37 +7,37 @@ module OpenTopo
     class ResponseToDemConverter
       DATE_TIME_FORMAT = "%F-%H-%M-%S"
 
-      def self.call(response, dem_type:, output_format:, configuration:)
-        DemFile.new(original_file: file_from_response(response, configuration), dem_type:, output_format:)
+      def initialize(configuration)
+        @configuration = configuration
       end
 
-      class << self
-        private
+      def call(response, dem_type:, output_format:)
+        DemFile.new(original_file: file_from_response(response), dem_type:, output_format:)
+      end
 
-        def file_from_response(response, configuration)
-          return nil if !response.data?
+      private
 
-          write_file(response, configuration.file_dir)
-        end
+      attr_reader :configuration
 
-        def write_file(response, file_dir)
-          FileUtils.mkdir_p(file_dir)
+      def file_from_response(response)
+        return nil if !response.data?
 
-          filename = filename_from_response(response)
-          file = File.new(File.join(file_dir, "#{filename}.tif"), "w")
+        write_file(response)
+      end
 
-          file.binmode
-          file.write(response.body)
-          file.close
+      def write_file(response)
+        FileUtils.mkdir_p(configuration.file_dir)
 
-          File.open(file, "r")
-        rescue SystemCallError, IOError, ArgumentError, TypeError => error
-          raise OpenTopo::Errors::FileError.new(error.message, file_path: file_dir)
-        end
+        filename = response.headers.filename || "dem_#{Time.now.strftime(DATE_TIME_FORMAT)}"
+        file = File.new(File.join(configuration.file_dir, "#{filename}.tif"), "w")
 
-        def filename_from_response(response)
-          response.headers.filename || "dem_#{Time.now.strftime(DATE_TIME_FORMAT)}"
-        end
+        file.binmode
+        file.write(response.body)
+        file.close
+
+        File.open(file, "r")
+      rescue SystemCallError, IOError, ArgumentError, TypeError => error
+        raise OpenTopo::Errors::FileError.new(error.message, file_path: configuration.file_dir)
       end
     end
   end

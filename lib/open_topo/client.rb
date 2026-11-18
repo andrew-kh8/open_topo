@@ -6,10 +6,23 @@ module OpenTopo
 
     attr_reader :configuration
 
-    def initialize(api_key = nil, configuration: OpenTopo.configuration, file_dir: nil)
+    def initialize(
+      api_key = nil,
+      file_dir: nil,
+      global_dataset: nil,
+      usgs_dataset: nil,
+      elevation_dataset: nil,
+      output_format: nil
+    )
       api_key ||= ENV.fetch(API_KEY_NAME)
-      @configuration = configuration.dup
-      @configuration.file_dir = file_dir unless file_dir.nil?
+      @configuration = OpenTopo.configuration.dup
+      @configuration.update(
+        file_dir:,
+        global_dataset:,
+        usgs_dataset:,
+        elevation_dataset:,
+        output_format:
+      )
       @request = Net::Request.new(api_key)
     end
 
@@ -20,7 +33,7 @@ module OpenTopo
       response = request.globaldem(params)
 
       if response.success?
-        Services::ResponseToDemConverter.call(response, dem_type: dataset, output_format:, configuration:)
+        Services::ResponseToDemConverter.new(configuration).call(response, dem_type: dataset, output_format:)
       else
         raise ::OpenTopo::Errors::ResponseError, response.body
       end
@@ -33,7 +46,7 @@ module OpenTopo
       response = request.usgsdem(params)
 
       if response.success?
-        Services::ResponseToDemConverter.call(response, dem_type: dataset_name, output_format:, configuration:)
+        Services::ResponseToDemConverter.new(configuration).call(response, dem_type: dataset_name, output_format:)
       else
         raise ::OpenTopo::Errors::ResponseError, response.body
       end

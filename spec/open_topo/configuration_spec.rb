@@ -32,6 +32,42 @@ RSpec.describe OpenTopo::Configuration do
     end
   end
 
+  describe "#update" do
+    it "updates known attributes" do
+      configuration.update(
+        file_dir: "./updated_dem_files",
+        global_dataset: :cop30,
+        usgs_dataset: :usgs30m,
+        elevation_dataset: :cop30,
+        output_format: :asc
+      )
+
+      expect(configuration.file_dir).to eq File.expand_path("./updated_dem_files")
+      expect(configuration.global_dataset).to eq :cop30
+      expect(configuration.usgs_dataset).to eq :usgs30m
+      expect(configuration.elevation_dataset).to eq :cop30
+      expect(configuration.output_format).to eq :asc
+    end
+
+    it "ignores unknown attributes" do
+      expect { configuration.update(unknown: :value) }.not_to raise_error
+    end
+
+    it "ignores nil values" do
+      configuration.update(global_dataset: nil, output_format: nil)
+
+      expect(configuration.global_dataset).to eq :srtmgl3
+      expect(configuration.output_format).to eq :tif
+    end
+
+    it "assigns values without validation" do
+      configuration.update(global_dataset: :custom, output_format: :custom)
+
+      expect(configuration.global_dataset).to eq :custom
+      expect(configuration.output_format).to eq :custom
+    end
+  end
+
   describe "#file_dir" do
     it "defaults to the expanded default directory" do
       expect(configuration.file_dir).to eq File.expand_path(OpenTopo::Configuration::DEFAULT_FILE_DIR)

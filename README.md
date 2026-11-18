@@ -78,16 +78,16 @@ Available options:
 | `elevation_dataset` | `:srtmgl3` | `#elevation` |
 | `output_format` | `:tif` | `#globaldem`, `#usgsdem` |
 
-Each client receives its own copy of the configuration, so clients can use different directories:
+Each client receives its own copy of the configuration and accepts the same options as keyword arguments to override the defaults for that client:
 
 ```ruby
-client_a = OpenTopo::Client.new(api_key, file_dir: "./dem_a")
-client_b = OpenTopo::Client.new(api_key, file_dir: "./dem_b")
+client_a = OpenTopo::Client.new(api_key, file_dir: "./dem_a", global_dataset: :srtmgl1)
+client_b = OpenTopo::Client.new(api_key, file_dir: "./dem_b", global_dataset: :cop30)
 ```
 
-You can also pass a full configuration object with `configuration:`. The current default is available via `OpenTopo.configuration.file_dir`, and `OpenTopo.reset_configuration!` restores it.
+The current defaults are available via `OpenTopo.configuration`, and `OpenTopo.reset_configuration!` restores them.
 
-`file_dir` is expanded to an absolute path, supports `~`, and is validated. Invalid values raise `OpenTopo::Errors::FileError`. The directory is created automatically when the first DEM file is saved. Converted CSV files are written next to the original TIF, so they use the same directory by default.
+`file_dir` is expanded to an absolute path, supports `~`, and is validated. Invalid paths raise `OpenTopo::Errors::FileError`. The directory is created automatically when the first DEM file is saved. Converted CSV files are written next to the original TIF, so they use the same directory by default.
 
 ## Development and contributing
 
