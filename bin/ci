@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+echo "START LOCAL CI"
+
+bundle exec standardrb
+bundle exec fasterer
+bundle exec bundle-audit check --update
+echo "LINTERS PASSED"
+
+COVERAGE=true bundle exec rspec
+echo "TESTS PASSED"
+
+echo -e $'\033[0;32m'LOCAL CI PASSED$'\033[0m'

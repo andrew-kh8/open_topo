@@ -61,8 +61,6 @@ module OpenTopo
       end
 
       expanded_path.freeze
-    rescue OpenTopo::Errors::FileError
-      raise
     rescue ArgumentError, TypeError, SystemCallError => error
       raise OpenTopo::Errors::FileError.new(error.message, file_path: value)
     end
