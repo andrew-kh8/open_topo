@@ -3,6 +3,55 @@
 RSpec.describe OpenTopo::Client do
   let(:instance) { described_class.new(ENV["OPEN_TOPOGRAPHY_API_KEY"]) }
 
+  describe "#configuration" do
+    after { OpenTopo.reset_configuration! }
+
+    context "when the module configuration changes after client creation" do
+      let(:client) { described_class.new(ENV["OPEN_TOPOGRAPHY_API_KEY"]) }
+
+      before do
+        OpenTopo.configure { |config| config.file_dir = "./default_dem_files" }
+        client
+        OpenTopo.configuration.file_dir = "./changed_dem_files"
+      end
+
+      it "copies the default configuration" do
+        expect(client.configuration.file_dir).to eq File.expand_path("./default_dem_files")
+      end
+    end
+
+    context "with configuration overrides" do
+      subject(:client) do
+        described_class.new(
+          ENV["OPEN_TOPOGRAPHY_API_KEY"],
+          file_dir: "./custom_dem_files",
+          global_dataset: :cop30,
+          usgs_dataset: :usgs30m,
+          elevation_dataset: :cop30,
+          output_format: :asc
+        )
+      end
+
+      it "overrides the default configuration" do
+        expect(client.configuration.file_dir).to eq File.expand_path("./custom_dem_files")
+        expect(client.configuration.global_dataset).to eq :cop30
+        expect(client.configuration.usgs_dataset).to eq :usgs30m
+        expect(client.configuration.elevation_dataset).to eq :cop30
+        expect(client.configuration.output_format).to eq :asc
+      end
+    end
+
+    context "with multiple clients" do
+      let(:first_client) { described_class.new(ENV["OPEN_TOPOGRAPHY_API_KEY"], file_dir: "./first_dem_files") }
+      let(:second_client) { described_class.new(ENV["OPEN_TOPOGRAPHY_API_KEY"], file_dir: "./second_dem_files") }
+
+      it "keeps per-client file directories independent" do
+        expect(first_client.configuration.file_dir).to eq File.expand_path("./first_dem_files")
+        expect(second_client.configuration.file_dir).to eq File.expand_path("./second_dem_files")
+      end
+    end
+  end
+
   describe "#globaldem" do
     context "with valid parameters" do
       let(:globaldem) { instance.globaldem(south: 42.45580075467154, north: 42.45911160123194, west: 25.526535836979747, east: 25.53120849654078) }
@@ -13,6 +62,47 @@ RSpec.describe OpenTopo::Client do
         VCR.use_cassette("globaldem/success_request") do
           expect(globaldem).to be_a(OpenTopo::DemFile)
         end
+      end
+    end
+
+    context "with configured defaults" do
+      let(:client) { described_class.new(ENV["OPEN_TOPOGRAPHY_API_KEY"], global_dataset: :cop30, output_format: :asc) }
+      let(:params) { instance_double(OpenTopo::Net::Params::GlobaldemParams, validate!: true) }
+      let(:request) { instance_double(OpenTopo::Net::Request) }
+      let(:response) { instance_double(OpenTopo::Net::Response, success?: true) }
+      let(:dem_file) { instance_double(OpenTopo::DemFile) }
+      let(:converter) { instance_double(OpenTopo::Services::ResponseToDemConverter) }
+
+      it "uses configuration values as defaults" do
+        expect(OpenTopo::Net::Params::GlobaldemParams).to receive(:new)
+          .with(south: 1, north: 2, west: 3, east: 4, demtype: :cop30, output_format: :asc)
+          .and_return(params)
+        expect(client).to receive(:request).and_return(request)
+        expect(request).to receive(:globaldem).with(params).and_return(response)
+        expect(OpenTopo::Services::ResponseToDemConverter).to receive(:new)
+          .with(client.configuration)
+          .and_return(converter)
+        expect(converter).to receive(:call)
+          .with(response, dem_type: :cop30, output_format: :asc)
+          .and_return(dem_file)
+
+        expect(client.globaldem(south: 1, north: 2, west: 3, east: 4)).to eq(dem_file)
+      end
+
+      it "passes a dataset override as demtype" do
+        expect(OpenTopo::Net::Params::GlobaldemParams).to receive(:new)
+          .with(south: 1, north: 2, west: 3, east: 4, demtype: :srtmgl1, output_format: :asc)
+          .and_return(params)
+        expect(client).to receive(:request).and_return(request)
+        expect(request).to receive(:globaldem).with(params).and_return(response)
+        expect(OpenTopo::Services::ResponseToDemConverter).to receive(:new)
+          .with(client.configuration)
+          .and_return(converter)
+        expect(converter).to receive(:call)
+          .with(response, dem_type: :srtmgl1, output_format: :asc)
+          .and_return(dem_file)
+
+        expect(client.globaldem(south: 1, north: 2, west: 3, east: 4, dataset: :srtmgl1)).to eq(dem_file)
       end
     end
 
@@ -51,6 +141,31 @@ RSpec.describe OpenTopo::Client do
         VCR.use_cassette("usgsdem/success_request") do
           expect(usgsdem).to be_a(OpenTopo::DemFile)
         end
+      end
+    end
+
+    context "with configured defaults" do
+      let(:client) { described_class.new(ENV["OPEN_TOPOGRAPHY_API_KEY"], usgs_dataset: :usgs30m, output_format: :hfa) }
+      let(:params) { instance_double(OpenTopo::Net::Params::UsgsdemParams, validate!: true) }
+      let(:request) { instance_double(OpenTopo::Net::Request) }
+      let(:response) { instance_double(OpenTopo::Net::Response, success?: true) }
+      let(:dem_file) { instance_double(OpenTopo::DemFile) }
+      let(:converter) { instance_double(OpenTopo::Services::ResponseToDemConverter) }
+
+      it "uses configuration values as defaults" do
+        expect(OpenTopo::Net::Params::UsgsdemParams).to receive(:new)
+          .with(south: 1, north: 2, west: 3, east: 4, dataset_name: :usgs30m, output_format: :hfa)
+          .and_return(params)
+        expect(client).to receive(:request).and_return(request)
+        expect(request).to receive(:usgsdem).with(params).and_return(response)
+        expect(OpenTopo::Services::ResponseToDemConverter).to receive(:new)
+          .with(client.configuration)
+          .and_return(converter)
+        expect(converter).to receive(:call)
+          .with(response, dem_type: :usgs30m, output_format: :hfa)
+          .and_return(dem_file)
+
+        expect(client.usgsdem(south: 1, north: 2, west: 3, east: 4)).to eq(dem_file)
       end
     end
 
@@ -106,10 +221,27 @@ RSpec.describe OpenTopo::Client do
         expect(request).to receive(:elevation).with(params).and_return(response)
         expect(OpenTopo::Services::ResponseToPointConverter).to receive(:call).with(response).and_return(point)
 
-        VCR.use_cassette("elevation/success_request") do
-          expect(elevation).to be_a(OpenTopo::Point)
-          expect(elevation).to eq(point)
-        end
+        expect(elevation).to be_a(OpenTopo::Point)
+        expect(elevation).to eq(point)
+      end
+    end
+
+    context "with configured defaults" do
+      let(:client) { described_class.new(ENV["OPEN_TOPOGRAPHY_API_KEY"], elevation_dataset: :cop30) }
+      let(:params) { instance_double(OpenTopo::Net::Params::ElevationParams, validate!: true) }
+      let(:request) { instance_double(OpenTopo::Net::Request) }
+      let(:response) { instance_double(OpenTopo::Net::Response, success?: true) }
+      let(:point) { instance_double(OpenTopo::Point) }
+
+      it "uses the configured dataset as the default" do
+        expect(OpenTopo::Net::Params::ElevationParams).to receive(:new)
+          .with(long: 1, lat: 2, dataset: :cop30)
+          .and_return(params)
+        expect(client).to receive(:request).and_return(request)
+        expect(request).to receive(:elevation).with(params).and_return(response)
+        allow(OpenTopo::Services::ResponseToPointConverter).to receive(:call).and_return(point)
+
+        expect(client.elevation(long: 1, lat: 2)).to eq(point)
       end
     end
 

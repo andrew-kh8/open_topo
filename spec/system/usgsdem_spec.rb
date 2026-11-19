@@ -20,7 +20,7 @@ RSpec.describe "USGS dem system specs" do
         expect(tif_file).to be_a(File)
         expect(csv_file).to be_a(File)
 
-        expect(FileUtils.compare_file(File.open("spec/fixtures/files/usgs_csv.csv"), csv_file)).to eq true
+        expect(FileUtils.compare_file("spec/fixtures/files/usgs_csv.csv", csv_file.path)).to eq true
       end
     end
   end

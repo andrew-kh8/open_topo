@@ -1,5 +1,8 @@
 ## [Unreleased]
 
+- Constrain `json` to `~> 2.21` because Faraday 1.x is incompatible with json 3.x
+- Add `OpenTopo.configure`/`OpenTopo.configuration` with `file_dir`, `global_dataset`, `usgs_dataset`, `elevation_dataset`, and `output_format` defaults; clients receive independent configuration copies, add `OpenTopo.reset_configuration!`, and validate/normalize `file_dir`
+
 ## [0.1.0] - 2026-08-31
 
 - Initial release

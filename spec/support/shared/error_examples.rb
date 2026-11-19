@@ -14,7 +14,7 @@ RSpec.shared_examples "error_examples" do
     let(:message) { {error: "error"} }
 
     it "sets the message to the value of the 'error' key" do
-      expect(instance.message).to eq("{:error=>\"error\"}")
+      expect(instance.message).to eq(message.to_s)
     end
   end
 

@@ -6,6 +6,7 @@
 /pkg/
 /spec/reports/
 /tmp/
+/open_topo_files/
 
 # rspec failure tracking
 .rspec_status
