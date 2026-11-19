@@ -106,10 +106,8 @@ RSpec.describe OpenTopo::Client do
         expect(request).to receive(:elevation).with(params).and_return(response)
         expect(OpenTopo::Services::ResponseToPointConverter).to receive(:call).with(response).and_return(point)
 
-        VCR.use_cassette("elevation/success_request") do
-          expect(elevation).to be_a(OpenTopo::Point)
-          expect(elevation).to eq(point)
-        end
+        expect(elevation).to be_a(OpenTopo::Point)
+        expect(elevation).to eq(point)
       end
     end
 

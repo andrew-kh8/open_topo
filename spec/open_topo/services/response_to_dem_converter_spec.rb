@@ -34,8 +34,9 @@ RSpec.describe OpenTopo::Services::ResponseToDemConverter do
     context "when response does not have a filename" do
       let(:filename) { nil }
 
-      before { Timecop.freeze(2026, 8, 15, 21, 56, 0) }
-      after { Timecop.return }
+      around do |example|
+        Timecop.freeze(2026, 8, 15, 21, 56, 0) { example.run }
+      end
 
       it "generates a default filename" do
         expect(dem_file.file.path).to eq "dem_2026-08-15-21-56-00.tif"
